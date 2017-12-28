@@ -1,0 +1,41 @@
+﻿id_perdu AI
+type_objet
+description
+photo
+date_perte
+pays
+ville
+cp
+quartier
+lieu_perte: cinéma, gare, aéroport, école, fac, mairie, transport public, supermarchés, autres
+recompense
+id_perso
+
+
+
+CONTACT
+id_contact
+pseudo
+mdp
+nom
+prenom
+mail
+telephone
+
+
+Objet
+
+id_objet AI
+trouve_perdu (1 trouvé / 2 perdu )
+
+type_objet: effets personnels(piéces d'identité - documents officiels, , carte bancaire,cles, portefeuille), bagages (sac à main, valise, sac à dos- cartable, malette, sacoche,sac de sport) bijoux-accesoires (chaine, collier, bague,boucle d'oreille,bracelet-gourmette,montre,parapluie, couvre-chef,gants, écharpe-châle) téléphone portable , appareils-accessoires numériques et informatiques(appareil photo, caméra - camescope,ordinateur portable, tablette, mp3, ipod, chargeur, écouteur, casque, perche à selfie), vêtements(manteau/blouson/parka,Pull/Gilet/Sweat,chaussures,vêtements divers), jouets-doudou, instruments de musique, équipements sportifs, divers
+
+description
+photo
+date_trouve_perdu
+pays
+ville
+cp
+quartier
+lieu_perte: cinéma, gare, aéroport, école, fac, mairie, transport public, supermarchés, autres
+id_perso

@@ -1,0 +1,101 @@
+/*
+font-family: 'Oswald', sans-serif;
+font-family: 'Raleway', sans-serif;
+font-family: 'Dosis', sans-serif;
+*/
+body {
+    background: #102E4A;
+    color: #55c1ff;
+}
+h2 {
+    font-family: 'Dosis', sans-serif;
+    font-size: 300%;
+    margin-bottom: 2%;
+}
+.lienscentraux {
+    width: 100%;
+}
+header {
+    background-color: #55c1ff;
+    text-align: center;
+}
+h1 {
+    color: #102E4A;
+    font-family: 'Oswald', sans-serif;
+    font-weight: bold;
+    font-size: 500%;
+    text-align: left;
+    margin-left: none;
+}
+.navbar-perdu {
+    background-color: #5887ff;
+    color: ghostwhite;
+    border: #55c1ff;
+    padding: 0.5% 5%;
+
+}
+.navbar-brand, .nav-btn-droit {
+    color: white !important;
+    text-align: center;
+}
+.nav-btn-droit{
+    font-size: 120%;
+    font-weight: bold;
+}
+
+
+.pub {
+    background: #654236;
+    text-align: justify;
+    color: azure;
+    margin: 0;
+}
+.lienscentraux {
+    background-color: #d0dfed;
+    padding: 20% 5%;
+    text-align: center;
+}
+footer {
+    padding: 1%;
+    margin: 0;
+    background-color: #5887ff;
+    text-align: center;
+    color: ghostwhite;
+}
+.footdiv {
+    display: inline-block;
+    text-align: center;
+    color: aliceblue;
+}
+footer div a {
+    color: ghostwhite;
+    font-size: 110%;
+}
+.clearfix {
+    clear: both;
+}
+.boutons {
+    text-decoration: none;
+    color: #102E4A;
+    font-weight: bold;
+    font-size: 120%;
+}
+.boutons:hover {
+    text-decoration: none;
+}
+.btn-boutons {
+    padding: 6%;
+    margin: 5%;
+    border-radius: 100%;
+}
+.photoObjet {
+    height: 180px;
+    margin-left: 45px;
+/*    margin-right: auto;*/
+}
+.pays
+{
+    overflow-y: auto;
+    height: 300px;
+}
+
