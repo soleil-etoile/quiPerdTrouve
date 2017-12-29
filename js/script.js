@@ -1,56 +1,3 @@
-/*jQuery(document).ready(function(){
-    chargement();
-    setInterval(chargement, 3000);
-    
-    jQuery("#btnSub").click(function(e) {
-        e.preventDefault();
-        ajout();
-    });
-
-    
-});
-
-function chargement(){
-
-    jQuery.ajax({
-        url: "test.php",
-        dataType: "html",
-        success()  {
-            
-        },
-        error() {
-            
-        },
-        complete(xhr) {
-           jQuery("#commentaire").html(xhr.responseText);
-        }
-    });
-};
-
-function ajout() {
-  
-    jQuery.ajax({
-        url: "ajout.php",
-        type: "POST",
-        data: jQuery("#formulaire").serialize() + "&ajax=1",
-        dataType: "html",
-        success()  {
-            
-        },
-        error() {
-            
-        },
-        complete(xhr) {
-         
-            chargement();
-            jQuery("#message").val("");
-        }
-    });
-    
-}
-    
-    */
-
 
 
 /*
@@ -68,7 +15,7 @@ function ajout() {
     }
 */
 
-jQuery(document).ready(
+/*jQuery(document).ready(
     function() 
     {
         jQuery('#pays').on('change',function(){
@@ -81,6 +28,57 @@ jQuery(document).ready(
                 })
             }
         })
-    });
+    });*/
    
-                    
+// pour perdu2.php
+/*$(function(){
+
+	$('#country').change(function(){
+		var code = $(this).val();
+		$('#city').load('perdu2.php', {code: code}, function(){
+			$('.city-select').fadeIn('slow');
+		});
+
+	});
+
+});*/
+
+// pour perdu3.php
+$(document).ready(function(){
+    $('#pays').on('change',function(){
+        var paysID = $(this).val();
+        if(paysID){
+            $.ajax({
+                type:'POST',
+                url:'ajaxData.php',
+                data:'id_pays='+paysID,
+                //data: $("#pays") + paysID,
+                success:function(html){
+                    $('#departement').html(html);
+                    $('#ville').html('<option value="">Select departement first</option>'); 
+                }
+            });
+        }else{
+            alert('else');
+            $('#departement').html('<option value="">Select country first</option>');
+            $('#ville').html('<option value="">Select state first</option>'); 
+        }
+    });
+    
+    $('#departement').on('change',function(){
+        var departID = $(this).val();
+        if(departID){
+            alert("depart");
+            $.ajax({
+                type:'POST',
+                url:'ajaxData.php',
+                data:'code_departement='+departID,
+                success:function(html){
+                    $('#ville').html(html);
+                }
+            }); 
+        }else{
+            $('#ville').html('<option value="">Select state first</option>'); 
+        }
+    });
+});

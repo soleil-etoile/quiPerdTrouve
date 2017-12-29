@@ -2,6 +2,8 @@
 /* connexion à la BDD */
 $dbh = new PDO('mysql:host=localhost;dbname=lost;charset=utf8', 'lost', 'perdutrouve');
 
+$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
 // mode debug 
 $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
 //tableaux associatifs par defaut
