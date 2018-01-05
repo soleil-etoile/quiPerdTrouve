@@ -1,0 +1,109 @@
+/*
+* This code is the property of ADventori SAS
+* You can use it and share it  respecting Attribution-ShareAlike 4.0 International
+* https://creativecommons.org/licenses/by-sa/4.0/ 
+* For more information,visit adventori.com or contact us at op@adventori.com
+*/
+/************ DYNAMISATION **************/
+/***** 3 - Product retargeting - 300x250 *****/
+    
+	//Data initialisation
+    var data = ADventori.initData({
+      img4:"images/fond.jpg",
+      description:"C’EST LE MOMENT<br><span class='txtBold'>DE SE FAIRE PLAISIR !</span>",
+      items: [
+		{data:{SFR_Mobile_Titre:"APPLE",SFR_Mobile_img:"images/iphone.png",SFR_Mobile_Contenu:"iPhone X", VF_Mobile_Prix:"799", original_price:"AU LIEU DE <span class='strikethrough'>849,99</span>",url:"https://www.google.fr/?q=test3"}},
+    {data:{SFR_Mobile_Titre:"SAMSUNG",SFR_Mobile_img:"images/samsung.png",SFR_Mobile_Contenu:"GALAXY S",VF_Mobile_Prix:"629",original_price:"AU LIEU DE <span class='strikethrough'>849,99</span>",url:"https://www.google.fr/?q=test5"}},
+		{data:{SFR_Mobile_Titre:"ALTICE",SFR_Mobile_img:"images/altice.png",SFR_Mobile_Contenu:"<span class='txtBold'>STAR</span>TRAIL <span class='txtBold'>9</span>",VF_Mobile_Prix:"29,99",original_price:"AU LIEU DE <span class='strikethrough'>849,99</span>",url:"https://www.google.fr/?q=test5"}},
+		
+      ]
+    });
+
+/****** CAROUSEL ******/    
+    ADventori.Carousel.prototype.initSlide = function(data) {
+    var html = data.SFR_Mobile_Contenu;
+    var div = document.createElement("div");
+    div.innerHTML = html;
+    var onlyText = div.textContent || div.innerText || "";
+    var limitText = onlyText;
+    // html.replace(onlyText,onlyText.substring(0,50))
+
+        result = '<div class="SFR_Mobile_Titre">' + data.SFR_Mobile_Titre + '</div>';
+        result += '<div class="SFR_Mobile_img" id="SFR_Mobile_img"><span class="img_helper"></span><img class="photos" src="' + data.SFR_Mobile_img + '"></div>';
+        result += '<div class="SFR_Mobile_Contenu">' + limitText + '</div>';
+        result += '<div class="VF_Mobile_Prix">'+data.VF_Mobile_Prix+'€</div>';
+        result += '<div class="original_price">'+data.original_price+'<span class="strikethrough">€</span></div>';
+        result += '<div id="cta"><img src="images/cta.png" alt=""></div>';
+        result+= '</div>'
+
+    return result;
+  };
+
+
+
+  var carousel = new ADventori.Carousel({
+      items: data.items,
+      hSplit:1,
+      vSplit:1,
+      insertHtmlStruct: true,
+      carouselContainer:document.getElementById("ADventori_myCarousel"),
+      navPrev:'',
+      navNext:'',
+      animation :'translateX',
+      autoStart: false,
+      hiddenBullets: false,
+
+  });
+
+
+
+// })
+
+// $('.SFR_Mobile_Titre').each(function(){
+//
+//         if($(this).text().length > 12)
+//         {
+//             $(this).css({'font-size':'10px'})
+//         }
+// })
+//
+//
+// $('.SFR_Mobile_Contenu').each(function(){
+//
+//     if($(this).text().length > 12)
+//     {
+//         $(this).css({'font-size':'10px'})
+//     }
+// })
+//
+//
+// $('.SVF_Mobile_Prix').each(function(){
+//
+//     if($(this).text().length > 12)
+//     {
+//         $(this).css({'font-size':'8px'})
+//     }
+// })
+
+
+ADventori.Display.adaptImage(document.getElementById('SFR_Mobile_img').lastChild,{fit:'contain'});
+
+ADventori.Display.adaptText(document.getElementsByClassName('SFR_Mobile_Titre'),7);
+ADventori.Display.adaptText(document.getElementsByClassName('SFR_Mobile_Contenu'), 7);
+ADventori.Display.adaptText(document.getElementsByClassName('VF_Mobile_Prix'), 7);
+
+ADventori.Display.setText(document.getElementById('description'), ADventori.data.description);
+ADventori.Display.adaptText(document.getElementById('description'), 7);
+
+ADventori.Display.setImageUrl(document.getElementById('img4'), ADventori.data.img4);
+ADventori.Display.adaptImage(document.getElementById('img4'), {fit: 'cover'});
+   /*
+     CODE BY ASHMAL - to prevent characters to read tagnames in SFR_Mobile_Contenu
+    
+    var html = data.SFR_Mobile_Contenu;
+    var div = document.createElement("div");
+    div.innerHTML = html;
+    var onlyText = div.textContent || div.innerText || "";
+    console.log(onlyText.replace(onlyText,"wawa"))
+    var limitText = html.replace(onlyText,onlyText.substring(0,50))
+    result += '<div class="SFR_Mobile_Contenu">' + limitText + '</div>';*/

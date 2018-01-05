@@ -1,0 +1,507 @@
+/*
+* This code is the property of ADventori SAS
+* You can use it and share it  respecting Attribution-ShareAlike 4.0 International
+* https://creativecommons.org/licenses/by-sa/4.0/ 
+* For more information,visit adventori.com or contact us at op@adventori.com
+*/
+@import url('https://adventori.com/lp/yourbrand/fonts/fonts.css');
+*{
+    box-sizing: border-box;
+    margin:0;
+    padding:0;
+}
+
+@font-face {
+  font-family: 'SFR-Regular';
+  src: url('fonts/SFR-Regular.eot'); /* IE9 Compat Modes */
+  src: url('fonts/SFR-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('fonts/SFR-Regular.woff2') format('woff2'), /* Super Modern Browsers */
+       url('fonts/SFR-Regular.woff') format('woff'), /* Pretty Modern Browsers */
+       url('fonts/SFR-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('fonts/SFR-Regular.svg#svgFontName') format('svg'); /* Legacy iOS */
+}
+
+
+@font-face {
+  font-family: 'SFR-Bold';
+  src: url('fonts/SFR-Bold.eot'); /* IE9 Compat Modes */
+  src: url('fonts/SFR-Bold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('fonts/SFR-Bold.woff2') format('woff2'), /* Super Modern Browsers */
+       url('fonts/SFR-Bold.woff') format('woff'), /* Pretty Modern Browsers */
+       url('fonts/SFR-Bold.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('fonts/SFR-Bold.svg#svgFontName') format('svg'); /* Legacy iOS */
+}
+
+.txtBold{
+    font-family: 'SFR-Bold';
+}
+
+.txtRegular{
+    font-family: 'SFR-Regular';
+}
+.strikethrough {
+  text-decoration: line-through;
+}
+sup{
+    font-size: 10px;
+}
+
+.SFR_Mobile_img{
+    position: absolute;
+    width: 90px !important;
+    height: 123px !important;
+    top: 14px;
+    margin-left: 52px;
+}
+.SFR_Mobile_img img{
+    right: 0;
+    position: absolute;
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+}
+#adventoriSlides .slide .item .SFR_Mobile_Titre{
+    position: relative;
+    width: 143px;
+    height: 25px;
+    /*background-color: blue;*/
+    display: block;
+    margin-left: 148px;
+    font-size: 18px;
+    line-height: 18px;
+    font-family: 'SFR-Regular';
+    margin-top: 7%;
+}
+
+#adventoriSlides .slide .item  .SFR_Mobile_Contenu{
+    position: relative;
+    width: 143px;
+    height: 28px;
+    /*background-color: white;*/
+    display: block;
+    margin-left: 148px;
+    font-size: 18px;
+    line-height: 18px;
+    font-family: 'SFR-Regular';
+}
+#adventoriSlides .slide .item  .VF_Mobile_Prix{
+    position: relative;
+    width: 135px;
+    height: 34px;
+    display: block;
+    margin-left: 148px;
+    font-size: 26px;
+    line-height: 26px;
+    font-family: 'SFR-Regular';
+    overflow: initial;
+}
+#adventoriSlides .slide .item  .original_price{
+    position: relative;
+    width: 135px;
+    height: 25px;
+    /*background-color: purple;*/
+    display: block;
+    margin-left: 148px;
+    font-size: 12px;
+    line-height: 12px;
+    font-family: 'SFR-Regular';
+    overflow: initial;
+    /*      line-height: 26px !important;*/
+}
+#cta{
+    position: absolute !important;
+    width: 163px;
+    height: 23px;
+    display: block;
+    width: 100% !important;
+   /* margin-top: 45px;*/
+   bottom: 25px;
+}
+#cta img{
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+    display: block;
+}
+#fond{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+}
+
+#ADventori_myAd{
+    position: relative;
+    overflow: hidden;
+    width: 300px;
+    height: 250px;
+    cursor:pointer;
+    border: solid 1px black;    
+    background-color: #ffffff;
+}
+#ADventori_myBrand{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    /*background: url(images/fond.jpg) no-repeat;*/
+
+}
+#ADventori_myBrand::after{
+    display: block;
+    width: 300px;
+    height: 250px;
+    content: "";
+    /*background: linear-gradient(to bottom, rgba(255,255,255,0.7) 0%,rgba(255,255,255,0.3) 100%);*/
+}
+#ADventori_logoContainer{
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0 auto;
+    padding: 10px;
+    z-index: 100;
+}
+
+#ADventori_logoContainer img{
+    width: 34px;
+    height: 34px;
+    margin: 0 auto;
+}
+#ADventori_myContent{
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width:100%;
+    height:200px;
+}
+#ADventori_slideContainer{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width:400%;
+    height:100%;
+    transition: all .3s cubic-bezier(1,.01,.2,.94);
+}
+.ADventori_slideContent{
+    position: relative;
+    float:left;
+    overflow: hidden;
+    width:298px;
+    height:200px;
+}
+#ADventori_contentSlide2{
+    width: 100%;
+    height: 100%;
+}
+.ADventori_text{
+    text-align: center;
+    color: #114454;
+    font-size: 17px;
+    line-height: 20px;
+    font-weight: bold;
+    text-transform: uppercase; 
+    position: absolute;
+    top: 10px;
+    width: 100%;
+    padding: 0 10px;
+  /*  font-family: 'SFR-Regular';*/
+    font-family: arial;
+    height: 40px;
+}
+#ADventori_text2{ 
+    opacity: 0;
+}
+
+#ADventori_myCarousel{
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    width:100%;
+    height:200px;
+    margin: auto;
+    padding: 0;
+
+}
+
+
+/* Carousel */
+#adventoriAd{
+    width: 100%;
+    height: 100%;
+}
+#adventoriSlides .slide .item{
+    height: 195px;
+    margin-bottom: 30px;
+
+}
+#adventoriSlides .slide .item .product, #adventoriSlides .slide .item .tuto{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+/* Product */
+#adventoriSlides .slide .item .product .img_container{
+    position:absolute;
+    top: 40px;
+    left: 20px;
+    width: 40%;
+    height: 100px;
+    margin: auto;
+    text-align: center;
+}
+#adventoriSlides .slide .item .product .img_container .img_helper{
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+#adventoriSlides .slide .item .product .img_container img{
+    display:inline;
+    max-width: 100%;
+    max-height: 100%;
+    vertical-align: middle;
+}
+#adventoriSlides .slide .item .product .name{
+    font-size: 16px;
+    font-weight: bold;
+    line-height:16px;
+    position:absolute;
+    top: 15px;
+    right: 10px;
+    width: 65%;
+    height:25px;
+    text-align:right;
+    text-transform:uppercase;
+    color: #EC6A6D;
+    font-family: 'SFR Regular';
+}
+#adventoriSlides .slide .item .product .description{
+    font-size: 12px;
+    line-height: 13px;
+    position: absolute;
+    top: 45px;
+    right: 10px;
+    width: 45%;
+    height: 40px;
+    text-align:right;
+    color: #114454;
+    font-family: 'SFR Regular'!important;
+}
+/*Original price*/
+#adventoriSlides .slide .item .product .original_price{
+    font-size:12px;
+    line-height: 15px;
+    top: 115px;
+    right:10px;
+    width: 40%;
+    height: 15px;
+    text-align: center;
+    text-align: right;
+    text-decoration: line-through;
+    color: #353535;
+    color: #114454;
+    font-family: 'SFR Regular';
+    position: absolute;
+}
+
+
+
+/*Price*/
+#adventoriSlides .slide .item .product .price{
+    font-family: 'SFR Regular';
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 24px;
+    position:absolute;
+    top: 85px;
+    right:10px;
+    width: 40%;
+    height: 35px;
+    text-align: right;
+    color: black;
+    color: #EC6A6D;
+}
+
+/* discount */
+#adventoriSlides .slide .item .product .discount{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 80px;
+    height: 80px;
+}
+#adventoriSlides .slide .item .product .discount .bgDiscount{
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-width: 80px 80px 0 0 ;
+    border-style: solid;
+    border-color: #EC6A6D transparent transparent; 
+}
+#adventoriSlides .slide .item .product .discount .valueDiscount{
+    font-family: 'SFR Regular';
+    font-size: 19px;
+    font-weight: bold;
+    line-height: 19px;
+    position: absolute;
+    top: 14px;
+    left: 2px;
+    width: 45px;
+    height: 19px;
+    color: white;
+}
+#adventoriSlides .slide .item .product .textCta{
+    font-family: 'SFR Regular';
+    font-size: 13px;
+    line-height: 15px;
+    padding: 10px;
+    text-align: center;
+    text-transform: uppercase;
+    color: white;
+    background-color: #EC6A6D;
+    width: 50%;
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+/* Tuto */
+
+
+#adventoriSlides .slide .item > div
+{
+    color:#ffffff;
+    /*line-height: normal !important;*/
+
+}
+
+#adventoriSlides .slide .item .tuto .img_container{
+    position:absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    text-align: center;
+}
+
+#adventoriSlides .slide .item .tuto .img_container .img_helper{
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+#adventoriSlides .slide .item .tuto .img_container .img_helper::before{
+    content:"";
+    background-color: rgba(0, 0, 0, 0.6);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+#adventoriSlides .slide .item .tuto .img_container .img_helper::after{
+    content:"";
+    background:url('img/lecteur_light.svg') center center no-repeat;
+    background-size: 25% 25%;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+#adventoriSlides .slide .item .tuto .img_container img{
+    display:inline;
+    max-height: 100%;
+    vertical-align: middle;
+}
+
+#adventoriSlides .slide .item .tuto .name{
+    font-size: 16px;
+    font-weight: bold;
+    line-height:18px;
+    position:absolute;
+    bottom: 25px;
+    right: 0px;
+    left: 0px;
+    width: 90%;
+    height:35px;
+    margin: auto;
+    text-align:center;
+    text-transform:uppercase;
+    color: white;
+    font-family: 'SFR Regular';
+    z-index: 10;
+}
+#adventoriSlides .slide .item .tuto .description{
+    font-size: 16px;
+    font-weight: bold;
+    line-height:18px;
+    position:absolute;
+    top: 25px;
+    right: 0px;
+    left: 0px;
+    width: 90%;
+    height:35px;
+    margin: auto;
+    text-align:center;
+    text-transform:uppercase;
+    color: white;
+    font-family: 'SFR Regular'!important;
+    z-index: 10;
+}
+#adventoriSlides .slide .item .tuto .original_price, #adventoriSlides .slide .item .tuto .price, #adventoriSlides .slide .item .tuto .discount, #adventoriSlides .slide .item .tuto .textCta{
+    display: none;
+}
+
+
+
+/* Bullets */
+#adventoriBullets{ bottom:0%;}
+#adventoriBullets > label{
+ text-shadow: 0px 0px 2px #ffffff;
+ color: #aa090c;
+ width: 12px;
+ height: 12px;
+}
+#adventoriBullets > label:hover{ color:#ff7380; } 
+#adventoriBullets > label.active{ color:#fff; }
+
+/* Navigation */
+
+#adventoriNav > label{
+    width: 12px;
+    height: auto;
+    height: 12px;
+    margin-top: 203px;    
+    padding-top: 0px;
+    opacity: 1;
+    border-radius: 50%;
+}
+.undefined{
+    widows: 100% !important;
+}
+
+#description
+{
+    width: 224px;
+    height: 43px;
+    font-size: 14px;
+    line-height: 14px;
+    position: absolute;
+    top: 14px;
+    left: 60px;
+    color: white;
+    /*font-family: 'SFR Regular'!important;*/
+    text-transform: uppercase;
+}
+
+#title-txt span
+{
+    font-weight: 800;
+}

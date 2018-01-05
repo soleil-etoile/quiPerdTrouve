@@ -10,44 +10,38 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="index.php"><i class="glyphicon glyphicon-home"></i> Accueil</a>
-            <a class="navbar-brand" href="index.php"><i class="glyphicon glyphicon-zoom-out"></i> J'ai perdu</a>
+            <a class="navbar-brand" href="perdu.php"><i class="glyphicon glyphicon-zoom-out"></i> J'ai perdu</a>
             <a class="navbar-brand" href="index.php"><i class="glyphicon glyphicon-zoom-in"></i> J'ai trouvé</a>
-            <a class="navbar-brand" href="index.php"><i class="glyphicon glyphicon-copy"></i> Je dépose une annonce</a>
+            <a class="navbar-brand" href="depotAnnonce.php"><i class="glyphicon glyphicon-copy"></i> Je dépose une annonce</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
+
+
                 
-                    <!--verification soi tu as un compte tu rentres et accedes au panier sinn on te propose de t'inscrire-->
-                    <?php
-                    if(isset($_SESSION['auth'])):
-                    ?>
-                    <!--menu connecté-->
-                    <li> <a href="panier.php">
-                         <i class="glyphicon glyphicon-shopping-cart"></i>Panier</a>
-                    </li> 
-
-                    <li> <a href="commenter.php">
-                          <i class="glyphicon glyphicon-pencil"></i>Commenter</a>
-                    </li>
-
-                    <li> <a href="quitter.php">
-                          <i class="glyphicon glyphicon-log-out"></i>Quitter</a>
-                    </li>
-                    <?php else: ?>
+                <!-- menu si connecté -->    
+                <?php
+                if(isset($_SESSION['auth'])):
+                ?>
+                <li> <a href="quitter.php" class="nav-btn-droit">
+                     <i class="glyphicon glyphicon-log-out"></i>Déconnexion <?php echo $_SESSION["pseudo"]; ?></a>
+                </li>
+                <?php else: ?>
                 <!--menu non connecté-->                    
                 <li><a href="inscription.php" class="nav-btn-droit">
                     <i class="glyphicon glyphicon-user"></i> Je m'inscris</a></li>
                 <li ><a href="connexion.php" class="nav-btn-droit">
                     <i class="glyphicon glyphicon-log-in"></i> Je me connecte</a></li>
-                    <?php endif; ?>
+              <?php endif; ?>
+
             </ul>
 
            
 
-            <form class="navbar-form navbar-right">
+            <form class="navbar-form navbar-left" method="post" action="recherche.php">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Je recherche...">
+                    <input type="search" class="form-control" placeholder="Je recherche..." name="query">
                     <span class="input-group-btn">
                         <button type="submit" class="btn btn-default">
                             <i class="glyphicon glyphicon-search"></i>

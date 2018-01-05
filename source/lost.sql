@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  ven. 22 déc. 2017 à 16:59
+-- Généré le :  ven. 05 jan. 2018 à 17:36
 -- Version du serveur :  10.1.28-MariaDB
 -- Version de PHP :  7.1.10
 
@@ -27,44 +27,47 @@ USE `lost`;
 -- --------------------------------------------------------
 
 --
--- Structure de la table `contacts`
+-- Structure de la table `annonceurs`
 --
 
-DROP TABLE IF EXISTS `contacts`;
-CREATE TABLE `contacts` (
-  `id_contact` int(11) NOT NULL,
+DROP TABLE IF EXISTS `annonceurs`;
+CREATE TABLE `annonceurs` (
+  `id_annonceur` int(11) NOT NULL,
   `pseudo` varchar(30) NOT NULL,
   `mdp` varchar(100) NOT NULL,
   `nom` varchar(100) NOT NULL,
   `prenom` varchar(100) NOT NULL,
-  `mail` varchar(100) NOT NULL
+  `email` varchar(100) NOT NULL,
+  `telephone` int(11) NOT NULL,
+  `token` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `contacts`
+-- Déchargement des données de la table `annonceurs`
 --
 
-INSERT INTO `contacts` (`id_contact`, `pseudo`, `mdp`, `nom`, `prenom`, `mail`) VALUES
-(1, 'irza', '123456789', 'Irina', 'Zakia', 'irza@gmail.com'),
-(2, 'irza', '123456789', 'Irina', 'Zakia', 'irza@gmail.com');
+INSERT INTO `annonceurs` (`id_annonceur`, `pseudo`, `mdp`, `nom`, `prenom`, `email`, `telephone`, `token`) VALUES
+(1, 'irza', '123456789', 'Irina', 'Zakia', 'irza@gmail.com', 0, ''),
+(2, 'irza', '123456789', 'Irina', 'Zakia', 'irza@gmail.com', 0, ''),
+(4, 'zakzak', '$2y$10$OYH7NW6roWe1puoyQLOEK.kSsNHOxejyhskBBxY2xyQW6OoBbsesS', 'seji', 'zakia', 'zakia.seji@gmail.com', 612345678, '');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `lieu`
+-- Structure de la table `lieux`
 --
 
-DROP TABLE IF EXISTS `lieu`;
-CREATE TABLE `lieu` (
+DROP TABLE IF EXISTS `lieux`;
+CREATE TABLE `lieux` (
   `id_lieu` int(11) NOT NULL,
   `lieu` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `lieu`
+-- Déchargement des données de la table `lieux`
 --
 
-INSERT INTO `lieu` (`id_lieu`, `lieu`) VALUES
+INSERT INTO `lieux` (`id_lieu`, `lieu`) VALUES
 (1, 'cinéma'),
 (2, 'gare'),
 (3, 'aéroport'),
@@ -83,29 +86,78 @@ INSERT INTO `lieu` (`id_lieu`, `lieu`) VALUES
 DROP TABLE IF EXISTS `objets`;
 CREATE TABLE `objets` (
   `id_objet` int(11) NOT NULL,
-  `trouve_perdu` int(11) NOT NULL COMMENT '1- trouve, 2 - perdu',
+  `id_trouve_perdu` int(11) NOT NULL COMMENT '1- trouve, 2 - perdu',
   `titre` varchar(50) NOT NULL,
   `description` text NOT NULL,
   `photo` varchar(40) DEFAULT NULL,
   `date_objet` date NOT NULL,
   `montant_recompense` int(11) NOT NULL,
-  `id_contact` int(11) NOT NULL,
+  `id_annonceur` int(11) NOT NULL,
   `id_type` int(11) NOT NULL,
-  `id_lieu` int(11) NOT NULL,
+  `id_lieu` int(11) DEFAULT NULL,
   `id_pays` int(11) NOT NULL,
-  `id_ville` int(11) NOT NULL
+  `code_departement` int(11) DEFAULT NULL,
+  `id_ville` int(11) DEFAULT NULL,
+  `id_option` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `objets`
 --
 
-INSERT INTO `objets` (`id_objet`, `trouve_perdu`, `titre`, `description`, `photo`, `date_objet`, `montant_recompense`, `id_contact`, `id_type`, `id_lieu`, `id_pays`, `id_ville`) VALUES
-(4, 1, 'Echarpe', 'echarpe rose', 'echarpe.jpg', '2017-12-20', 0, 1, 5, 2, 75, 25),
-(5, 2, 'Cles maison', 'cles maison', 'cles.jpg', '2017-12-17', 5, 2, 1, 1, 75, 10457),
-(6, 2, 'bague', 'bague en or', NULL, '2017-12-11', 50, 2, 3, 7, 75, 14785),
-(7, 2, 'chapeau', 'chapeau rose', 'chapeau.jpg', '2017-12-11', 10, 2, 5, 4, 75, 32451),
-(8, 2, 'telephone', 'telephone portable  Samsung', 'tel.jpg', '2017-12-20', 50, 1, 4, 6, 75, 23547);
+INSERT INTO `objets` (`id_objet`, `id_trouve_perdu`, `titre`, `description`, `photo`, `date_objet`, `montant_recompense`, `id_annonceur`, `id_type`, `id_lieu`, `id_pays`, `code_departement`, `id_ville`, `id_option`) VALUES
+(4, 1, 'Echarpe', 'echarpe rose', 'echarpe.jpg', '2017-12-20', 0, 1, 5, 2, 75, 0, 25, 1),
+(6, 2, 'bague', 'bague en or', 'no_photo.jpg', '2017-12-11', 50, 4, 3, 7, 75, 38, 14785, 1),
+(7, 2, 'chapeau', 'chapeau rose', 'chapeau.jpg', '2017-12-11', 10, 2, 5, 4, 75, 0, 32451, 1),
+(8, 2, 'telephone', 'telephone portable  Samsung', 'tel.jpg', '2017-12-20', 50, 1, 4, 6, 75, 0, 23547, 1),
+(9, 1, 'fdsfgdfd', 'gdfgdfgdfgd', '1628174bdbb6163166575c56e88c020e.jpg', '0000-00-00', 0, 4, 1, 8, 75, 0, 0, 0),
+(10, 1, 'fdsfgdfd', 'gdfgdfgdfgd', '9070b995c8470ab7f8500e9228c555f1.jpg', '0000-00-00', 0, 4, 1, 8, 75, 0, 0, 0),
+(11, 2, 'opù', 'ipùç', '	\r\nno_photo.jpg', '0000-00-00', 0, 4, 3, 2, 11, 0, 0, 0),
+(12, 2, 'opù', 'ipùç', '	\r\nno_photo.jpg', '0000-00-00', 0, 4, 3, 5, 11, 0, 0, 0),
+(13, 2, 'opù', 'ipùç', '	\r\nno_photo.jpg', '0000-00-00', 0, 4, 3, 3, 11, 0, 0, 0),
+(14, 2, 'opù', 'ipùç', '	\r\nno_photo.jpg', '0000-00-00', 0, 4, 3, 7, 11, 0, 0, 0),
+(15, 2, 'opù', 'ipùç', 'no_photo.jpg', '0000-00-00', 0, 4, 3, 6, 11, 0, 0, 0),
+(16, 1, 'test', '123 456', 'no_photo.jpg', '0000-00-00', 0, 4, 3, 1, 75, 0, 0, 0),
+(18, 2, 'truc', 'test 123', 'no_photo.jpg', '0000-00-00', 0, 4, 1, 8, 75, 0, 0, 0),
+(19, 2, 'Mon cerveau', 'Diminution de neurones en fin de formation.', 'no_photo.jpg', '0000-00-00', 10000, 4, 8, 8, 84, 0, 0, 1),
+(20, 2, 'test departement', '', 'no_photo.jpg', '2018-01-21', 0, 4, 5, 8, 75, 6, 1962, 0),
+(21, 2, 'test departement', '', 'no_photo.jpg', '2018-01-21', 0, 4, 5, 8, 75, 16, 5849, 1),
+(22, 2, 'test departement2', '', 'no_photo.jpg', '2018-01-21', 0, 4, 5, 2, 75, 17, 6000, 1),
+(23, 2, 'stylo', 'stylo vert', '05be0fdfcdca264494780cd98b851daf.jpg', '2018-01-01', 10000, 4, 8, 8, 75, 2, 706, 2),
+(24, 2, 'stylo', 'stylo vert', '6c608dd5eb05a04b34989e3861e9c502.jpg', '2018-01-01', 10000, 4, 8, 8, 75, 2, 706, 2),
+(25, 2, 'stylo', 'stylo vert', 'd7ba8e0edc38f134512b76e54bc4a115.jpg', '2018-01-01', 10000, 4, 8, 8, 75, 2, 706, 2),
+(26, 1, 'portable', 'portable portable portable Samsung', 'e9a2eddd9485ae1e56aba75f7263bdb4.jpg', '2018-01-03', 0, 4, 4, 8, 75, 4, 1610, 2),
+(27, 2, 'sac', 'sac beige', 'ad0c566dc70c4ede4a28d16a93f25892.jpg', '2018-01-03', 0, 4, 2, 8, 75, 6, 1999, 2),
+(28, 2, 'verre', 'verre verre verre', 'no_photo.jpg', '2017-10-19', 0, 4, 1, 8, 186, 0, 0, 1),
+(29, 2, 'lunettes', 'lunettes de soleil de marque DIOR', '0aaa21ebe2a664f07b355eaa2f377aab.jpg', '2017-12-06', 50, 4, 3, 8, 6, 0, 0, 2),
+(30, 2, 'passeport', 'passeport  biométrique', 'c379ad5e48eb857397d2ce04bd900151.jpg', '2018-01-02', 100, 4, 1, 8, 2, 0, 0, 2),
+(31, 2, 'Carte vitale', 'Je perdu ma carte vitale aux alentours de la fac de droit.', 'e6c61c245b16236ede09ddbb6c1f0b5a.jpg', '2018-01-03', 10, 4, 1, 4, 75, 0, 11, 1),
+(32, 2, 'Carte vitale', 'Je perdu ma carte vitale aux alentours de la fac de droit.', '29538cbcec2d8308c9c0d55e0f2668b2.jpg', '2018-01-03', 10, 4, 1, 4, 79, 0, 0, 2),
+(33, 2, 'Carte vitale', 'je perdu ma carte vitale aux alentours de la fac de droit', 'facad1258a1858db0e15b71fcfd3131a.jpg', '2018-01-02', 10, 4, 1, 4, 75, 30, 11336, 0),
+(34, 2, 'notre tête', 'On a perdu notre tête à force de coder pour la création de ce site. Aussi, nous espérons qu\'il sera à votre gôut ! Enjoy :)', 'ec1a5d9578d6897e6d35f20273005d31jpeg', '2018-01-05', 5000, 4, 1, 4, 75, 30, 11336, 0),
+(35, 2, 'Clé USB', 'Clé USB', '27aadafe59d2be4d887a44b098ede21d.jpg', '2018-01-04', 5, 4, 4, 8, 7, 0, 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `options_payantes`
+--
+
+DROP TABLE IF EXISTS `options_payantes`;
+CREATE TABLE `options_payantes` (
+  `id_option` int(11) NOT NULL,
+  `nom_option` varchar(30) NOT NULL,
+  `detail_option` varchar(100) NOT NULL,
+  `prix` decimal(5,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `options_payantes`
+--
+
+INSERT INTO `options_payantes` (`id_option`, `nom_option`, `detail_option`, `prix`) VALUES
+(1, 'option 1', 'Chaque jour pendant 60 jours pour 2.99€ TTC', '2.99'),
+(2, 'option 2', 'Chaque jour pendant 90 jours pour 4.99€ TTC', '4.99');
 
 -- --------------------------------------------------------
 
@@ -373,6 +425,26 @@ INSERT INTO `pays` (`id_pays`, `code`, `alpha2`, `alpha3`, `nom_en_gb`, `nom_fr_
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `trouve_perdu`
+--
+
+DROP TABLE IF EXISTS `trouve_perdu`;
+CREATE TABLE `trouve_perdu` (
+  `id_trouve_perdu` int(11) NOT NULL,
+  `nom_trouve_perdu` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `trouve_perdu`
+--
+
+INSERT INTO `trouve_perdu` (`id_trouve_perdu`, `nom_trouve_perdu`) VALUES
+(1, 'trouve'),
+(2, 'perdu');
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `type_objet`
 --
 
@@ -405,7 +477,7 @@ INSERT INTO `type_objet` (`id_type`, `type`) VALUES
 DROP TABLE IF EXISTS `villes_france_free`;
 CREATE TABLE `villes_france_free` (
   `id_pays` int(11) NOT NULL DEFAULT '75',
-  `ville_id` mediumint(8) UNSIGNED NOT NULL,
+  `id_ville` mediumint(8) UNSIGNED NOT NULL,
   `code_departement` varchar(3) DEFAULT NULL,
   `nom_departement` varchar(255) DEFAULT NULL,
   `ville_nom_reel` varchar(45) DEFAULT NULL,
@@ -417,7 +489,7 @@ CREATE TABLE `villes_france_free` (
 -- Déchargement des données de la table `villes_france_free`
 --
 
-INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
+INSERT INTO `villes_france_free` (`id_pays`, `id_ville`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
 (75, 1, '01', 'Ain', 'Ozan', '01190', '284'),
 (75, 2, '01', 'Ain', 'Cormoranche-sur-Saône', '01290', '123'),
 (75, 3, '01', 'Ain', 'Plagne', '01130', '298'),
@@ -1336,7 +1408,7 @@ INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `no
 (75, 916, '02', 'Aisne', 'Frières-Faillouël', '02700', '336'),
 (75, 917, '02', 'Aisne', 'Wiège-Faty', '02120', '832'),
 (75, 918, '02', 'Aisne', 'Saint-Nicolas-aux-Bois', '02410', '685');
-INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
+INSERT INTO `villes_france_free` (`id_pays`, `id_ville`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
 (75, 919, '02', 'Aisne', 'Gricourt', '02100', '355'),
 (75, 920, '02', 'Aisne', 'Blesmes', '02400', '094'),
 (75, 921, '02', 'Aisne', 'Ville-Savoye', '02220', '817'),
@@ -2159,7 +2231,7 @@ INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `no
 (75, 1738, '04', 'Alpes-de-Haute-Provence', 'Entrevennes', '04700', '077'),
 (75, 1739, '04', 'Alpes-de-Haute-Provence', 'Digne-les-Bains', '04000', '070'),
 (75, 1740, '04', 'Alpes-de-Haute-Provence', 'Peipin', '04200', '145');
-INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
+INSERT INTO `villes_france_free` (`id_pays`, `id_ville`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
 (75, 1741, '04', 'Alpes-de-Haute-Provence', 'Thorame-Haute', '04170', '219'),
 (75, 1742, '04', 'Alpes-de-Haute-Provence', 'Peyroules', '04120', '148'),
 (75, 1743, '04', 'Alpes-de-Haute-Provence', 'Revest-des-Brousses', '04150', '162'),
@@ -2962,7 +3034,7 @@ INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `no
 (75, 2540, '08', 'Ardennes', 'Bulson', '08450', '088'),
 (75, 2541, '08', 'Ardennes', 'Alincourt', '08310', '005'),
 (75, 2542, '08', 'Ardennes', 'Villers-sur-le-Mont', '08430', '482');
-INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
+INSERT INTO `villes_france_free` (`id_pays`, `id_ville`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
 (75, 2543, '08', 'Ardennes', 'Champigneulle', '08250', '098'),
 (75, 2544, '08', 'Ardennes', 'Neufmaison', '08560', '315'),
 (75, 2545, '08', 'Ardennes', 'Sainte-Marie', '08400', '390'),
@@ -3834,7 +3906,7 @@ INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `no
 (75, 3411, '10', 'Aube', 'Vendeuvre-sur-Barse', '10140', '401'),
 (75, 3412, '10', 'Aube', 'Juvanzé', '10140', '183'),
 (75, 3413, '10', 'Aube', 'Montpothier', '10400', '254');
-INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
+INSERT INTO `villes_france_free` (`id_pays`, `id_ville`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
 (75, 3414, '10', 'Aube', 'La Villeneuve-au-Chêne', '10140', '423'),
 (75, 3415, '10', 'Aube', 'Landreville', '10110', '187'),
 (75, 3416, '10', 'Aube', 'Montigny-les-Monts', '10130', '251'),
@@ -4717,7 +4789,7 @@ INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `no
 (75, 4293, '12', 'Aveyron', 'Capdenac-Gare', '12700', '052'),
 (75, 4294, '12', 'Aveyron', 'Mouret', '12330', '161'),
 (75, 4295, '12', 'Aveyron', 'Lestrade-et-Thouels', '12430', '129');
-INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
+INSERT INTO `villes_france_free` (`id_pays`, `id_ville`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
 (75, 4296, '12', 'Aveyron', 'Valady', '12330', '288'),
 (75, 4297, '12', 'Aveyron', 'Brommat', '12600', '036'),
 (75, 4298, '12', 'Aveyron', 'Cabanès', '12800', '041'),
@@ -5523,7 +5595,7 @@ INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `no
 (75, 5098, '14', 'Calvados', 'Merville-Franceville-Plage', '14810', '409'),
 (75, 5099, '14', 'Calvados', 'Montviette', '14140', '450'),
 (75, 5100, '14', 'Calvados', 'Amayé-sur-Seulles', '14310', '007');
-INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
+INSERT INTO `villes_france_free` (`id_pays`, `id_ville`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
 (75, 5101, '14', 'Calvados', 'Heurtevent', '14140', '330'),
 (75, 5102, '14', 'Calvados', 'Fauguernon', '14100', '260'),
 (75, 5103, '14', 'Calvados', 'Canteloup', '14370', '134'),
@@ -6366,7 +6438,7 @@ INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `no
 (75, 5940, '17', 'Charente-Maritime', 'Sablonceaux', '17600', '307'),
 (75, 5941, '17', 'Charente-Maritime', 'Portes-en-Ré', '17880', '286'),
 (75, 5942, '17', 'Charente-Maritime', 'Pons', '17800', '283');
-INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
+INSERT INTO `villes_france_free` (`id_pays`, `id_ville`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
 (75, 5943, '17', 'Charente-Maritime', 'Saint-Aigulin', '17360', '309'),
 (75, 5944, '17', 'Charente-Maritime', 'Saint-Vivien', '17220', '413'),
 (75, 5945, '17', 'Charente-Maritime', 'Sainte-Radegonde', '17250', '389'),
@@ -7155,7 +7227,7 @@ INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `no
 (75, 6728, '19', 'Corrèze', 'Saint-Angel', '19200', '180'),
 (75, 6729, '19', 'Corrèze', 'Sainte-Fortunade', '19490', '203'),
 (75, 6730, '19', 'Corrèze', 'Lostanges', '19500', '119');
-INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
+INSERT INTO `villes_france_free` (`id_pays`, `id_ville`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
 (75, 6731, '19', 'Corrèze', 'La Roche-Canillac', '19320', '174'),
 (75, 6732, '19', 'Corrèze', 'Saint-Germain-les-Vergnes', '19330', '207'),
 (75, 6733, '19', 'Corrèze', 'Hautefage', '19400', '091'),
@@ -7966,7 +8038,7 @@ INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `no
 (75, 7538, '21', 'Côte-d\'or', 'Chaugey', '21290', '157'),
 (75, 7539, '21', 'Côte-d\'or', 'Marigny-lès-Reullée', '21200', '387'),
 (75, 7540, '21', 'Côte-d\'or', 'Chivres', '21820', '172');
-INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
+INSERT INTO `villes_france_free` (`id_pays`, `id_ville`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
 (75, 7541, '21', 'Côte-d\'or', 'Chevannes', '21220', '169'),
 (75, 7542, '21', 'Côte-d\'or', 'Leuglay', '21290', '346'),
 (75, 7543, '21', 'Côte-d\'or', 'Saffres', '21350', '537'),
@@ -8768,7 +8840,7 @@ INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `no
 (75, 8339, '24', 'Dordogne', 'Saint-Vincent-de-Cosse', '24220', '510'),
 (75, 8340, '24', 'Dordogne', 'Sainte-Nathalène', '24200', '471'),
 (75, 8341, '24', 'Dordogne', 'Boulazac', '24750', '053');
-INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
+INSERT INTO `villes_france_free` (`id_pays`, `id_ville`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
 (75, 8342, '24', 'Dordogne', 'Plazac', '24580', '330'),
 (75, 8343, '24', 'Dordogne', 'Saint-Michel-de-Montaigne', '24230', '466'),
 (75, 8344, '24', 'Dordogne', 'Soulaures', '24540', '542'),
@@ -9607,7 +9679,7 @@ INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `no
 (75, 9177, '25', 'Doubs', 'Saint-Maurice-Colombier', '25260', '524'),
 (75, 9178, '25', 'Doubs', 'Placey', '25170', '455'),
 (75, 9179, '25', 'Doubs', 'Luxiol', '25110', '354');
-INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
+INSERT INTO `villes_france_free` (`id_pays`, `id_ville`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
 (75, 9180, '25', 'Doubs', 'Cademène', '25290', '106'),
 (75, 9181, '25', 'Doubs', 'La Bretenière', '25640', '092'),
 (75, 9182, '25', 'Doubs', 'Marvelise', '25250', '369'),
@@ -10479,7 +10551,7 @@ INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `no
 (75, 10048, '27', 'Eure', 'Saint-Pierre-la-Garenne', '27600', '599'),
 (75, 10049, '27', 'Eure', 'La Vieille-Lyre', '27330', '685'),
 (75, 10050, '27', 'Eure', 'Valailles', '27300', '667');
-INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
+INSERT INTO `villes_france_free` (`id_pays`, `id_ville`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
 (75, 10051, '27', 'Eure', 'Ézy-sur-Eure', '27530', '230'),
 (75, 10052, '27', 'Eure', 'Le Landin', '27350', '363'),
 (75, 10053, '27', 'Eure', 'Honguemare-Guenouville', '27310', '340'),
@@ -11283,7 +11355,7 @@ INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `no
 (75, 10851, '28', 'Eure-et-Loir', 'Barjouville', '28630', '024'),
 (75, 10852, '28', 'Eure-et-Loir', 'Saint-Laurent-la-Gâtine', '28210', '343'),
 (75, 10853, '28', 'Eure-et-Loir', 'Aunay-sous-Auneau', '28700', '013');
-INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
+INSERT INTO `villes_france_free` (`id_pays`, `id_ville`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
 (75, 10854, '28', 'Eure-et-Loir', 'Marchéville', '28120', '234'),
 (75, 10855, '28', 'Eure-et-Loir', 'Oulins', '28260', '293'),
 (75, 10856, '28', 'Eure-et-Loir', 'Intréville', '28310', '197'),
@@ -12111,7 +12183,7 @@ INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `no
 (75, 11678, '31', 'Haute-Garonne', 'Laffite-Toupière', '31360', '260'),
 (75, 11679, '31', 'Haute-Garonne', 'Villefranche-de-Lauragais', '31290', '582'),
 (75, 11680, '31', 'Haute-Garonne', 'Mondonville', '31700', '351');
-INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
+INSERT INTO `villes_france_free` (`id_pays`, `id_ville`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
 (75, 11681, '31', 'Haute-Garonne', 'Mirambeau', '31230', '343'),
 (75, 11682, '31', 'Haute-Garonne', 'Azas', '31380', '038'),
 (75, 11683, '31', 'Haute-Garonne', 'Ambax', '31230', '007'),
@@ -12940,7 +13012,7 @@ INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `no
 (75, 12506, '32', 'Gers', 'Mas-d\'Auvignon', '32700', '241'),
 (75, 12507, '32', 'Gers', 'Lannepax', '32190', '190'),
 (75, 12508, '32', 'Gers', 'Mauvezin', '32120', '249');
-INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
+INSERT INTO `villes_france_free` (`id_pays`, `id_ville`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
 (75, 12509, '32', 'Gers', 'Augnax', '32120', '014'),
 (75, 12510, '32', 'Gers', 'Castillon-Massas', '32360', '089'),
 (75, 12511, '32', 'Gers', 'Saint-Griède', '32110', '380'),
@@ -13778,7 +13850,7 @@ INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `no
 (75, 13343, '34', 'Hérault', 'Saint-Brès', '34670', '244'),
 (75, 13344, '34', 'Hérault', 'Villeneuve-lès-Béziers', '34420', '336'),
 (75, 13345, '34', 'Hérault', 'Matelles', '34270', '153');
-INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
+INSERT INTO `villes_france_free` (`id_pays`, `id_ville`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
 (75, 13346, '34', 'Hérault', 'Garrigues', '34160', '112'),
 (75, 13347, '34', 'Hérault', 'Villeneuve-lès-Maguelone', '34750', '337'),
 (75, 13348, '34', 'Hérault', 'Saint-Jean-de-Minervois', '34360', '269'),
@@ -14570,7 +14642,7 @@ INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `no
 (75, 14134, '37', 'Indre-et-Loire', 'Joué-lès-Tours', '37300', '122'),
 (75, 14135, '37', 'Indre-et-Loire', 'Marçay', '37500', '144'),
 (75, 14136, '37', 'Indre-et-Loire', 'Azay-le-Rideau', '37190', '014');
-INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
+INSERT INTO `villes_france_free` (`id_pays`, `id_ville`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
 (75, 14137, '37', 'Indre-et-Loire', 'Ports', '37800', '187'),
 (75, 14138, '37', 'Indre-et-Loire', 'Saint-Michel-sur-Loire', '37130', '227'),
 (75, 14139, '37', 'Indre-et-Loire', 'Charentilly', '37390', '059'),
@@ -15404,7 +15476,7 @@ INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `no
 (75, 14967, '39', 'Jura', 'Menotey', '39290', '323'),
 (75, 14968, '39', 'Jura', 'Moutonne', '39270', '375'),
 (75, 14969, '39', 'Jura', 'Montfleur', '39320', '353');
-INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
+INSERT INTO `villes_france_free` (`id_pays`, `id_ville`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
 (75, 14970, '39', 'Jura', 'Villette-lès-Dole', '39100', '573'),
 (75, 14971, '39', 'Jura', 'Pont-d\'Héry', '39110', '436'),
 (75, 14972, '39', 'Jura', 'Gendrey', '39350', '246'),
@@ -16278,7 +16350,7 @@ INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `no
 (75, 15840, '41', 'Loir-et-Cher', 'Vendôme', '41100', '269'),
 (75, 15841, '41', 'Loir-et-Cher', 'Saint-Romain-sur-Cher', '41140', '229'),
 (75, 15842, '41', 'Loir-et-Cher', 'Villetrun', '41100', '291');
-INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
+INSERT INTO `villes_france_free` (`id_pays`, `id_ville`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
 (75, 15843, '41', 'Loir-et-Cher', 'Mazangé', '41100', '131'),
 (75, 15844, '41', 'Loir-et-Cher', 'Choue', '41170', '053'),
 (75, 15845, '41', 'Loir-et-Cher', 'Saint-Julien-de-Chédon', '41400', '217'),
@@ -17076,7 +17148,7 @@ INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `no
 (75, 16637, '44', 'Loire-Atlantique', 'Fay-de-Bretagne', '44130', '056'),
 (75, 16638, '44', 'Loire-Atlantique', 'Juigné-des-Moutiers', '44670', '078'),
 (75, 16639, '44', 'Loire-Atlantique', 'Saint-Hilaire-de-Clisson', '44190', '165');
-INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
+INSERT INTO `villes_france_free` (`id_pays`, `id_ville`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
 (75, 16640, '44', 'Loire-Atlantique', 'Boussay', '44190', '022'),
 (75, 16641, '44', 'Loire-Atlantique', 'Donges', '44480', '052'),
 (75, 16642, '44', 'Loire-Atlantique', 'Missillac', '44780', '098'),
@@ -17905,7 +17977,7 @@ INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `no
 (75, 17465, '46', 'Lot', 'Boissières', '46150', '032'),
 (75, 17466, '46', 'Lot', 'Cazillac', '46600', '067'),
 (75, 17467, '46', 'Lot', 'Lachapelle-Auzac', '46200', '145');
-INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
+INSERT INTO `villes_france_free` (`id_pays`, `id_ville`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
 (75, 17468, '46', 'Lot', 'Valroufié', '46090', '327'),
 (75, 17469, '46', 'Lot', 'Mercuès', '46090', '191'),
 (75, 17470, '46', 'Lot', 'Cénevières', '46330', '068'),
@@ -18672,7 +18744,7 @@ INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `no
 (75, 18231, '49', 'Maine-et-Loire', 'Saint-Melaine-sur-Aubance', '49610', '308'),
 (75, 18232, '49', 'Maine-et-Loire', 'Le Lion-d\'Angers', '49220', '176'),
 (75, 18233, '49', 'Maine-et-Loire', 'Artannes-sur-Thouet', '49260', '011');
-INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
+INSERT INTO `villes_france_free` (`id_pays`, `id_ville`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
 (75, 18234, '49', 'Maine-et-Loire', 'Rochefort-sur-Loire', '49190', '259'),
 (75, 18235, '49', 'Maine-et-Loire', 'La Jaille-Yvon', '49220', '161'),
 (75, 18236, '49', 'Maine-et-Loire', 'Vern-d\'Anjou', '49220', '367'),
@@ -19486,7 +19558,7 @@ INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `no
 (75, 19044, '51', 'Marne', 'Reims', '51100', '454'),
 (75, 19045, '51', 'Marne', 'Épernay', '51200', '230'),
 (75, 19046, '51', 'Marne', 'Somme-Bionne', '51800', '543');
-INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
+INSERT INTO `villes_france_free` (`id_pays`, `id_ville`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
 (75, 19047, '51', 'Marne', 'Dommartin-sous-Hans', '51800', '213'),
 (75, 19048, '51', 'Marne', 'Coolus', '51510', '168'),
 (75, 19049, '51', 'Marne', 'Le Mesnil-sur-Oger', '51190', '367'),
@@ -20315,7 +20387,7 @@ INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `no
 (75, 19872, '52', 'Haute-Marne', 'Marac', '52260', '307'),
 (75, 19873, '52', 'Haute-Marne', 'Millières', '52240', '325'),
 (75, 19874, '52', 'Haute-Marne', 'Ternat', '52210', '486');
-INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
+INSERT INTO `villes_france_free` (`id_pays`, `id_ville`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
 (75, 19875, '52', 'Haute-Marne', 'Richebourg', '52120', '422'),
 (75, 19876, '52', 'Haute-Marne', 'Levécourt', '52150', '287'),
 (75, 19877, '52', 'Haute-Marne', 'Luzy-sur-Marne', '52000', '297'),
@@ -21074,7 +21146,7 @@ INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `no
 (75, 20630, '54', 'Meurthe-et-Moselle', 'Tiercelet', '54190', '525'),
 (75, 20631, '54', 'Meurthe-et-Moselle', 'Flirey', '54470', '200'),
 (75, 20632, '54', 'Meurthe-et-Moselle', 'Beuveille', '54620', '067');
-INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
+INSERT INTO `villes_france_free` (`id_pays`, `id_ville`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
 (75, 20633, '54', 'Meurthe-et-Moselle', 'Saulxerotte', '54115', '494'),
 (75, 20634, '54', 'Meurthe-et-Moselle', 'Mexy', '54135', '367'),
 (75, 20635, '54', 'Meurthe-et-Moselle', 'Bagneux', '54170', '041'),
@@ -21868,7 +21940,7 @@ INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `no
 (75, 21423, '56', 'Morbihan', 'Pleugriffet', '56120', '160'),
 (75, 21424, '56', 'Morbihan', 'Kernascléden', '56540', '264'),
 (75, 21425, '56', 'Morbihan', 'Helléan', '56120', '082');
-INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
+INSERT INTO `villes_france_free` (`id_pays`, `id_ville`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
 (75, 21426, '56', 'Morbihan', 'Saint-Abraham', '56140', '202'),
 (75, 21427, '56', 'Morbihan', 'Saint-Gildas-de-Rhuys', '56730', '214'),
 (75, 21428, '56', 'Morbihan', 'Le Cours', '56230', '045'),
@@ -22723,7 +22795,7 @@ INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `no
 (75, 22277, '57', 'Moselle', 'Grundviller', '57510', '263'),
 (75, 22278, '57', 'Moselle', 'Bérig-Vintrange', '57660', '063'),
 (75, 22279, '57', 'Moselle', 'Sturzelbronn', '57230', '661');
-INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
+INSERT INTO `villes_france_free` (`id_pays`, `id_ville`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
 (75, 22280, '57', 'Moselle', 'Grostenquin', '57660', '262'),
 (75, 22281, '57', 'Moselle', 'Fouligny', '57220', '230'),
 (75, 22282, '57', 'Moselle', 'Hazembourg', '57430', '308'),
@@ -23599,7 +23671,7 @@ INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `no
 (75, 23152, '59', 'Nord', 'Tilloy-lez-Marchiennes', '59870', '596'),
 (75, 23153, '59', 'Nord', 'Château-l\'Abbaye', '59230', '144'),
 (75, 23154, '59', 'Nord', 'Hon-Hergies', '59570', '310');
-INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
+INSERT INTO `villes_france_free` (`id_pays`, `id_ville`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
 (75, 23155, '59', 'Nord', 'Bousignies-sur-Roc', '59149', '101'),
 (75, 23156, '59', 'Nord', 'Phalempin', '59133', '462'),
 (75, 23157, '59', 'Nord', 'Ghissignies', '59530', '259'),
@@ -24480,7 +24552,7 @@ INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `no
 (75, 24032, '61', 'Orne', 'Saint-Christophe-de-Chaulieu', '61800', '374'),
 (75, 24033, '61', 'Orne', 'Beaufai', '61270', '032'),
 (75, 24034, '61', 'Orne', 'Frênes', '61800', '177');
-INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
+INSERT INTO `villes_france_free` (`id_pays`, `id_ville`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
 (75, 24035, '61', 'Orne', 'Sées', '61500', '464'),
 (75, 24036, '61', 'Orne', 'Fleuré', '61200', '170'),
 (75, 24037, '61', 'Orne', 'Médavy', '61570', '256'),
@@ -25299,7 +25371,7 @@ INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `no
 (75, 24850, '62', 'Pas-de-Calais', 'Wisques', '62219', '898'),
 (75, 24851, '62', 'Pas-de-Calais', 'Merlimont', '62155', '571'),
 (75, 24852, '62', 'Pas-de-Calais', 'Saint-Léonard', '62360', '755');
-INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
+INSERT INTO `villes_france_free` (`id_pays`, `id_ville`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
 (75, 24853, '62', 'Pas-de-Calais', 'Planques', '62310', '659'),
 (75, 24854, '62', 'Pas-de-Calais', 'Nédon', '62550', '600'),
 (75, 24855, '62', 'Pas-de-Calais', 'Hénu', '62760', '430'),
@@ -26069,7 +26141,7 @@ INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `no
 (75, 25619, '63', 'Puy-de-Dôme', 'Billom', '63160', '040'),
 (75, 25620, '63', 'Puy-de-Dôme', 'Pardines', '63500', '268'),
 (75, 25621, '63', 'Puy-de-Dôme', 'Bergonne', '63500', '036');
-INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
+INSERT INTO `villes_france_free` (`id_pays`, `id_ville`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
 (75, 25622, '63', 'Puy-de-Dôme', 'Manglieu', '63270', '205'),
 (75, 25623, '63', 'Puy-de-Dôme', 'Champs', '63440', '082'),
 (75, 25624, '63', 'Puy-de-Dôme', 'Tauves', '63690', '426'),
@@ -26798,7 +26870,7 @@ INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `no
 (75, 26347, '64', 'Pyrénées-Atlantiques', 'Oraàs', '64390', '423'),
 (75, 26348, '64', 'Pyrénées-Atlantiques', 'Gan', '64290', '230'),
 (75, 26349, '64', 'Pyrénées-Atlantiques', 'Boueilh-Boueilho-Lasque', '64330', '141');
-INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
+INSERT INTO `villes_france_free` (`id_pays`, `id_ville`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
 (75, 26350, '64', 'Pyrénées-Atlantiques', 'Irissarry', '64780', '273'),
 (75, 26351, '64', 'Pyrénées-Atlantiques', 'Saint-Pée-sur-Nivelle', '64310', '495'),
 (75, 26352, '64', 'Pyrénées-Atlantiques', 'Briscous', '64240', '147'),
@@ -27545,7 +27617,7 @@ INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `no
 (75, 27093, '66', 'Pyrénées-Orientales', 'Estoher', '66320', '073'),
 (75, 27094, '66', 'Pyrénées-Orientales', 'Fontpédrouse', '66360', '080'),
 (75, 27095, '66', 'Pyrénées-Orientales', 'L\'Albère', '66480', '001');
-INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
+INSERT INTO `villes_france_free` (`id_pays`, `id_ville`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
 (75, 27096, '66', 'Pyrénées-Orientales', 'Baillestavy', '66320', '013'),
 (75, 27097, '66', 'Pyrénées-Orientales', 'Fontrabiouse', '66210', '081'),
 (75, 27098, '66', 'Pyrénées-Orientales', 'Sainte-Marie', '66470', '182'),
@@ -28366,7 +28438,7 @@ INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `no
 (75, 27913, '68', 'Haut-Rhin', 'Ribeauville', '68150', '269'),
 (75, 27914, '68', 'Haut-Rhin', 'Zimmersheim', '68440', '386'),
 (75, 27915, '68', 'Haut-Rhin', 'Mittelwihr', '68630', '209');
-INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
+INSERT INTO `villes_france_free` (`id_pays`, `id_ville`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
 (75, 27916, '68', 'Haut-Rhin', 'Durmenach', '68480', '075'),
 (75, 27917, '68', 'Haut-Rhin', 'Rorschwihr', '68590', '285'),
 (75, 27918, '68', 'Haut-Rhin', 'Bisel', '68580', '039'),
@@ -29178,7 +29250,7 @@ INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `no
 (75, 28724, '70', 'Haute-Saône', 'Héricourt', '70400', '285'),
 (75, 28725, '70', 'Haute-Saône', 'Aulx-lès-Cromary', '70190', '036'),
 (75, 28726, '70', 'Haute-Saône', 'Tavey', '70400', '497');
-INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
+INSERT INTO `villes_france_free` (`id_pays`, `id_ville`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
 (75, 28727, '70', 'Haute-Saône', 'Senargent-Mignafans', '70110', '487'),
 (75, 28728, '70', 'Haute-Saône', 'Volon', '70180', '574'),
 (75, 28729, '70', 'Haute-Saône', 'Ambiévillers', '70210', '013'),
@@ -29928,7 +30000,7 @@ INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `no
 (75, 29473, '72', 'Sarthe', 'Montigny', '72670', '207'),
 (75, 29474, '72', 'Sarthe', 'Brette-les-Pins', '72250', '047'),
 (75, 29475, '72', 'Sarthe', 'Villaines-sous-Malicorne', '72270', '377');
-INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
+INSERT INTO `villes_france_free` (`id_pays`, `id_ville`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
 (75, 29476, '72', 'Sarthe', 'Assé-le-Boisne', '72130', '011'),
 (75, 29477, '72', 'Sarthe', 'La Chapelle-Huon', '72310', '064'),
 (75, 29478, '72', 'Sarthe', 'Rouessé-Vassé', '72140', '255'),
@@ -30753,7 +30825,7 @@ INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `no
 (75, 30297, '74', 'Haute-Savoie', 'Bluffy', '74290', '036'),
 (75, 30298, '74', 'Haute-Savoie', 'Giez', '74210', '135'),
 (75, 30299, '74', 'Haute-Savoie', 'Collonges-sous-Salève', '74160', '082');
-INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
+INSERT INTO `villes_france_free` (`id_pays`, `id_ville`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
 (75, 30300, '74', 'Haute-Savoie', 'Reyvroz', '74200', '222'),
 (75, 30301, '74', 'Haute-Savoie', 'Allèves', '74540', '004'),
 (75, 30302, '74', 'Haute-Savoie', 'Saint-Jean-de-Sixt', '74450', '239'),
@@ -31485,7 +31557,7 @@ INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `no
 (75, 31028, '76', 'Seine-Maritime', 'Ricarville-du-Val', '76510', '526'),
 (75, 31029, '76', 'Seine-Maritime', 'Ancretiéville-Saint-Victor', '76760', '010'),
 (75, 31030, '76', 'Seine-Maritime', 'Dampierre-Saint-Nicolas', '76510', '210');
-INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
+INSERT INTO `villes_france_free` (`id_pays`, `id_ville`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
 (75, 31031, '76', 'Seine-Maritime', 'Mauny', '76530', '419'),
 (75, 31032, '76', 'Seine-Maritime', 'Grand-Camp', '76170', '318'),
 (75, 31033, '76', 'Seine-Maritime', 'Mont-Cauvaire', '76690', '443'),
@@ -32228,7 +32300,7 @@ INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `no
 (75, 31770, '78', 'Yvelines', 'Montainville', '78124', '415'),
 (75, 31771, '78', 'Yvelines', 'Porcheville', '78440', '501'),
 (75, 31772, '78', 'Yvelines', 'Jouy-Mauvoisin', '78200', '324');
-INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
+INSERT INTO `villes_france_free` (`id_pays`, `id_ville`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
 (75, 31773, '78', 'Yvelines', 'Bois-d\'Arcy', '78390', '073'),
 (75, 31774, '78', 'Yvelines', 'Flacourt', '78200', '234'),
 (75, 31775, '78', 'Yvelines', 'Triel-sur-Seine', '78510', '624'),
@@ -33049,7 +33121,7 @@ INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `no
 (75, 32590, '80', 'Somme', 'Nouvion', '80860', '598'),
 (75, 32591, '80', 'Somme', 'Embreville', '80570', '265'),
 (75, 32592, '80', 'Somme', 'Thieulloy-la-Ville', '80290', '755');
-INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
+INSERT INTO `villes_france_free` (`id_pays`, `id_ville`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
 (75, 32593, '80', 'Somme', 'Davenescourt', '80500', '236'),
 (75, 32594, '80', 'Somme', 'Saint-Sauflieu', '80160', '717'),
 (75, 32595, '80', 'Somme', 'Hescamps', '80290', '436'),
@@ -33914,7 +33986,7 @@ INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `no
 (75, 33454, '82', 'Tarn-et-Garonne', 'Sérignac', '82500', '180'),
 (75, 33455, '82', 'Tarn-et-Garonne', 'Espinas', '82160', '056'),
 (75, 33456, '82', 'Tarn-et-Garonne', 'Campsas', '82370', '027');
-INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
+INSERT INTO `villes_france_free` (`id_pays`, `id_ville`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
 (75, 33457, '82', 'Tarn-et-Garonne', 'Orgueil', '82370', '136'),
 (75, 33458, '82', 'Tarn-et-Garonne', 'Marsac', '82120', '104'),
 (75, 33459, '82', 'Tarn-et-Garonne', 'Finhan', '82700', '062'),
@@ -34745,7 +34817,7 @@ INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `no
 (75, 34284, '86', 'Vienne', 'Gouex', '86320', '107'),
 (75, 34285, '86', 'Vienne', 'Plaisance', '86500', '192'),
 (75, 34286, '86', 'Vienne', 'Payroux', '86350', '189');
-INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
+INSERT INTO `villes_france_free` (`id_pays`, `id_ville`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
 (75, 34287, '86', 'Vienne', 'Beaumont', '86490', '019'),
 (75, 34288, '86', 'Vienne', 'Asnières-sur-Blour', '86430', '011'),
 (75, 34289, '86', 'Vienne', 'Montamisé', '86360', '163'),
@@ -35571,7 +35643,7 @@ INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `no
 (75, 35109, '88', 'Vosges', 'Serécourt', '88320', '455'),
 (75, 35110, '88', 'Vosges', 'Derbamont', '88270', '129'),
 (75, 35111, '88', 'Vosges', 'Saint-Prancher', '88500', '433');
-INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
+INSERT INTO `villes_france_free` (`id_pays`, `id_ville`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
 (75, 35112, '88', 'Vosges', 'Monthureux-sur-Saône', '88410', '310'),
 (75, 35113, '88', 'Vosges', 'Serocourt', '88320', '456'),
 (75, 35114, '88', 'Vosges', 'Moyemont', '88700', '318'),
@@ -36399,7 +36471,7 @@ INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `no
 (75, 35936, '92', 'Hauts-de-Seine', 'Bourg-la-Reine', '92340', '014'),
 (75, 35937, '93', 'Seine-Saint-Denis', 'Le Bourget', '93350', '013'),
 (75, 35938, '93', 'Seine-Saint-Denis', 'Bagnolet', '93170', '006');
-INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
+INSERT INTO `villes_france_free` (`id_pays`, `id_ville`, `code_departement`, `nom_departement`, `ville_nom_reel`, `ville_code_postal`, `ville_commune`) VALUES
 (75, 35939, '93', 'Seine-Saint-Denis', 'La Courneuve', '93120', '027'),
 (75, 35940, '93', 'Seine-Saint-Denis', 'Pavillons-sous-Bois', '93320', '057'),
 (75, 35941, '93', 'Seine-Saint-Denis', 'Sevran', '93270', '071'),
@@ -37169,15 +37241,15 @@ INSERT INTO `villes_france_free` (`id_pays`, `ville_id`, `code_departement`, `no
 --
 
 --
--- Index pour la table `contacts`
+-- Index pour la table `annonceurs`
 --
-ALTER TABLE `contacts`
-  ADD PRIMARY KEY (`id_contact`);
+ALTER TABLE `annonceurs`
+  ADD PRIMARY KEY (`id_annonceur`);
 
 --
--- Index pour la table `lieu`
+-- Index pour la table `lieux`
 --
-ALTER TABLE `lieu`
+ALTER TABLE `lieux`
   ADD PRIMARY KEY (`id_lieu`);
 
 --
@@ -37187,9 +37259,18 @@ ALTER TABLE `objets`
   ADD PRIMARY KEY (`id_objet`),
   ADD KEY `id_type` (`id_type`),
   ADD KEY `id_lieu` (`id_lieu`),
-  ADD KEY `id_contact` (`id_contact`),
+  ADD KEY `id_contact` (`id_annonceur`),
   ADD KEY `id_pays` (`id_pays`),
-  ADD KEY `id_ville` (`id_ville`);
+  ADD KEY `id_ville` (`id_ville`),
+  ADD KEY `id_souscription` (`id_option`),
+  ADD KEY `id_trouve_perdu` (`id_trouve_perdu`),
+  ADD KEY `code_departement` (`code_departement`);
+
+--
+-- Index pour la table `options_payantes`
+--
+ALTER TABLE `options_payantes`
+  ADD PRIMARY KEY (`id_option`);
 
 --
 -- Index pour la table `pays`
@@ -37201,6 +37282,12 @@ ALTER TABLE `pays`
   ADD UNIQUE KEY `code_unique` (`code`);
 
 --
+-- Index pour la table `trouve_perdu`
+--
+ALTER TABLE `trouve_perdu`
+  ADD PRIMARY KEY (`id_trouve_perdu`);
+
+--
 -- Index pour la table `type_objet`
 --
 ALTER TABLE `type_objet`
@@ -37210,39 +37297,52 @@ ALTER TABLE `type_objet`
 -- Index pour la table `villes_france_free`
 --
 ALTER TABLE `villes_france_free`
-  ADD PRIMARY KEY (`ville_id`),
+  ADD PRIMARY KEY (`id_ville`),
   ADD KEY `ville_departement` (`code_departement`),
   ADD KEY `ville_nom_reel` (`ville_nom_reel`),
   ADD KEY `ville_code_postal` (`ville_code_postal`),
-  ADD KEY `id_pays` (`id_pays`);
+  ADD KEY `id_pays` (`id_pays`),
+  ADD KEY `code_departement` (`code_departement`);
 
 --
 -- AUTO_INCREMENT pour les tables déchargées
 --
 
 --
--- AUTO_INCREMENT pour la table `contacts`
+-- AUTO_INCREMENT pour la table `annonceurs`
 --
-ALTER TABLE `contacts`
-  MODIFY `id_contact` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+ALTER TABLE `annonceurs`
+  MODIFY `id_annonceur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT pour la table `lieu`
+-- AUTO_INCREMENT pour la table `lieux`
 --
-ALTER TABLE `lieu`
+ALTER TABLE `lieux`
   MODIFY `id_lieu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT pour la table `objets`
 --
 ALTER TABLE `objets`
-  MODIFY `id_objet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_objet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+
+--
+-- AUTO_INCREMENT pour la table `options_payantes`
+--
+ALTER TABLE `options_payantes`
+  MODIFY `id_option` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `pays`
 --
 ALTER TABLE `pays`
   MODIFY `id_pays` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=242;
+
+--
+-- AUTO_INCREMENT pour la table `trouve_perdu`
+--
+ALTER TABLE `trouve_perdu`
+  MODIFY `id_trouve_perdu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `type_objet`
@@ -37254,7 +37354,7 @@ ALTER TABLE `type_objet`
 -- AUTO_INCREMENT pour la table `villes_france_free`
 --
 ALTER TABLE `villes_france_free`
-  MODIFY `ville_id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36832;
+  MODIFY `id_ville` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36832;
 
 --
 -- Contraintes pour les tables déchargées
@@ -37264,9 +37364,10 @@ ALTER TABLE `villes_france_free`
 -- Contraintes pour la table `objets`
 --
 ALTER TABLE `objets`
-  ADD CONSTRAINT `objets_ibfk_1` FOREIGN KEY (`id_lieu`) REFERENCES `lieu` (`id_lieu`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `objets_ibfk_1` FOREIGN KEY (`id_lieu`) REFERENCES `lieux` (`id_lieu`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `objets_ibfk_2` FOREIGN KEY (`id_type`) REFERENCES `type_objet` (`id_type`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `objets_ibfk_3` FOREIGN KEY (`id_contact`) REFERENCES `contacts` (`id_contact`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `objets_ibfk_3` FOREIGN KEY (`id_annonceur`) REFERENCES `annonceurs` (`id_annonceur`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `objets_ibfk_6` FOREIGN KEY (`id_trouve_perdu`) REFERENCES `trouve_perdu` (`id_trouve_perdu`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -1,0 +1,18 @@
+/*
+* This code is the property of ADventori SAS
+* You can use it and share it  respecting Attribution-ShareAlike 4.0 International
+* https://creativecommons.org/licenses/by-sa/4.0/ 
+* For more information,visit adventori.com or contact us at op@adventori.com
+*/
+/****** ANIMATION ******/
+
+var translate = document.getElementsByClassName("ADventori_slideContent")[0].offsetWidth;
+
+var tl = new TimelineMax({onComplete:launchCarousel, delay:0});
+// tl.to(('#titre1'), 0.5, {autoAlpha:0},"+=2");
+// tl.to(('#titre2'), 0.5, {autoAlpha:1});
+tl.to(('#ADventori_slide2'), 0.5, {css:{transform:"translateX(-"+translate+"px)"}});
+
+function launchCarousel(){	
+	carousel.start();
+}

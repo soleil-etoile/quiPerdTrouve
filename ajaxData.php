@@ -1,18 +1,17 @@
 <?php
 //Include database configuration file
-include('connexion.php');
+require('includes/database.php');
 
 if(isset($_POST["id_pays"]) && !empty($_POST["id_pays"])){
     //Get all state data
-    $query = $dbh->query("SELECT code_departement, nom_departement FROM villes_france_free WHERE id_pays = ".$_POST['id_pays']." ORDER BY nom_departement ASC");
-    
-    //Count total number of rows
-    $rowCount = $query->num_rows;
+    $query = $dbh->query("SELECT DISTINCT nom_departement, code_departement FROM villes_france_free WHERE id_pays = ".$_POST['id_pays']." ORDER BY nom_departement ASC");
+
+   $listeDepartements = $query->fetchAll();
     
     //Afficher liste des departements
-    if($rowCount > 0){
+    if(count($listeDepartements) > 0){
         echo '<option value="">Choisissez le departement</option>';
-        while($row = $query->fetch_assoc()){ 
+        foreach($listeDepartements as $row){ 
             echo '<option value="'.$row['code_departement'].'">'.$row['nom_departement'].'</option>';
         }
     }else{
@@ -22,16 +21,16 @@ if(isset($_POST["id_pays"]) && !empty($_POST["id_pays"])){
 
 if(isset($_POST["code_departement"]) && !empty($_POST["code_departement"])){
     //Recuperer les données des villes
-    $query = $dbh->query("SELECT ville_id, ville_nom_reel FROM villes_france_free WHERE code_departement = ".$_POST['code_departement']." ORDER BY ville_nom_reel ASC");
+    $query = $dbh->query("SELECT DISTINCT id_ville, ville_nom_reel FROM villes_france_free WHERE code_departement = ".$_POST['code_departement']." ORDER BY ville_nom_reel ASC");
     
     //Count total number of rows
-    $rowCount = $query->num_rows;
+    $listeVilles = $query->fetchAll();
     
     //Display cities list
-    if($rowCount > 0){
+    if(count($listeVilles) > 0){
         echo '<option value="">Choisissez la ville</option>';
-        while($row = $query->fetch_assoc()){ 
-            echo '<option value="'.$row['ville_id'].'">'.$row['ville_nom_reel'].'</option>';
+        foreach($listeVilles as $row){ 
+            echo '<option value="'.$row['id_ville'].'">'.$row['ville_nom_reel'].'</option>';
         }
     }else{
         echo '<option value="">Ville n\'est pas disponible</option>';

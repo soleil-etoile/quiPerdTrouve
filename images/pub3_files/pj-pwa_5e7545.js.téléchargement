@@ -1,0 +1,78 @@
+(function () {
+  if (pwa) {
+    registerSW();
+    offlineRequest();
+  } else {
+    unregisterSW();
+    clearAll();
+  }
+})();
+
+function offlineRequest() {
+  ys.$(document).ready(function () {
+    ys.$('#form_motor_pagesjaunes').submit(function () {
+      if (!navigator.onLine) {
+        Notification.requestPermission(function (status) {
+          console.log('Notification permission status:', status);
+        });
+        navigator.serviceWorker.ready.then(function (reg) {
+          alert('Background Sync will be triggered');
+          let quoiQui = ys.$('#pj_search_quoiqui').val();
+          let ou = ys.$('#pj_search_ou').val();
+          let proxi = (ys.$('#pj_search_proximite').hasClass('pjchecked')) ? 1 : 0;
+          console.log('offlineSearch:chercherlespros?quoiqui=' + quoiQui + '&ou=' + ou + '&proximite=' + proxi);
+          return reg.sync.register('offlineSearch$chercherlespros?quoiqui=' + quoiQui + '&ou=' + ou + '&proximite=' + proxi + '$' + 'https://' + window.location.hostname + '/annuaire/');
+        }).catch(function (error) {
+          console.log(error);
+        });
+      }
+
+    });
+  });
+}
+
+function findLocalItems(query) {
+  let i, results = [];
+  for (i in localStorage) {
+    if (localStorage.hasOwnProperty(i)) {
+      if (i.match(query) || (!query && typeof i === 'string')) {
+        value = JSON.parse(localStorage.getItem(i));
+        results.push({key: i, val: value});
+      }
+    }
+  }
+  return results;
+}
+
+function clearAll() {
+  let result = findLocalItems('PWA-');
+  for (let i = 0; i < result.length; i++) {
+    localStorage.removeItem(result[i].key);
+  }
+}
+
+function unregisterSW() {
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistration().then(function (registration) {
+      if (registration) {
+        registration.unregister().then(function (result) {
+          if (result) {
+            caches.delete('PWA-fdcontent-v1');
+            caches.delete('PWA-assets-v1');
+            caches.delete('PWA-precache-v1');
+          }
+        });
+      }
+    })
+  }
+}
+
+function registerSW() {
+  if ('serviceWorker' in navigator && 'SyncManager' in window) {
+    navigator.serviceWorker.register('https://' + window.location.hostname + '/sw.js').then(function (reg) {
+      reg.update();
+    }).catch(function (err) {
+      console.log(err);
+    });
+  }
+}

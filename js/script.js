@@ -1,84 +1,65 @@
-
-
-/*
-    function getList(type, obj) {
-        jQuery("#loading_" + type).show(); // montre le chargement
-        jQuery.post("../test2.php", {type: type, id: jQuery("#"+obj).val()}, onAjaxSuccess);
-        function onAjaxSuccess(data) {
-             out = document.getElementById(type);
-             for (var i = out.length - 1; i >= 0; i--) {
-                  out.options[i] = null;
-             }
-             eval(data);
-             jQuery("#loading_" + type).hide(); // chargement terminé 
-        }
-    }
-*/
-
-/*jQuery(document).ready(
-    function() 
-    {
-        jQuery('#pays').on('change',function(){
-            jQuery(countryName)=jQuery(this).val();
-            
-            if(countryName){
-                jQuery.ajax({
-                    type: 'POST';
-                    url:
-                })
-            }
-        })
-    });*/
-   
-// pour perdu2.php
-/*$(function(){
-
-	$('#country').change(function(){
-		var code = $(this).val();
-		$('#city').load('perdu2.php', {code: code}, function(){
-			$('.city-select').fadeIn('slow');
-		});
-
-	});
-
-});*/
-
-// pour perdu3.php
 $(document).ready(function(){
+    // si on choisi le pays, on charge le liste des départements
     $('#pays').on('change',function(){
-        var paysID = $(this).val();
+       var paysID = $(this).val();
         if(paysID){
             $.ajax({
                 type:'POST',
                 url:'ajaxData.php',
-                data:'id_pays='+paysID,
+                data:{id_pays:paysID},
                 //data: $("#pays") + paysID,
                 success:function(html){
+                    /*alert(html);*/
                     $('#departement').html(html);
-                    $('#ville').html('<option value="">Select departement first</option>'); 
-                }
+                    $('#ville').html('<option value="">Choisissez avant tout le departement</option>'); 
+                }/*,
+                error: function(a,b,c)
+                {
+                    alert(a + b + c);
+                }*/
             });
         }else{
             alert('else');
-            $('#departement').html('<option value="">Select country first</option>');
-            $('#ville').html('<option value="">Select state first</option>'); 
+            $('#departement').html('<option value="">Choisissez avant tout le pays</option>');
+            $('#ville').html('<option value="">Choisissez avant tout le departement</option>'); 
         }
     });
     
+    // si on choisi le département, on charge le liste des villes
     $('#departement').on('change',function(){
         var departID = $(this).val();
         if(departID){
-            alert("depart");
             $.ajax({
                 type:'POST',
                 url:'ajaxData.php',
                 data:'code_departement='+departID,
                 success:function(html){
+                    /*alert(html);*/
                     $('#ville').html(html);
-                }
+                }/*,
+                error: function(a,b,c)
+                {
+                    alert(a + b + c);
+                }*/
             }); 
         }else{
-            $('#ville').html('<option value="">Select state first</option>'); 
+            $('#ville').html('<option value="">Choisissez avant tout le departement</option>'); 
         }
     });
+    
+    
+   /* // datepicker - pour afficher le calendrier
+    jQuery("#madate").datepicker();
+        });*/
+    
 });
+
+$(function() {
+    $( "#datepicker" ).datepicker({
+      showOtherMonths: true,
+      selectOtherMonths: true
+    });
+  } );
+
+
+            
