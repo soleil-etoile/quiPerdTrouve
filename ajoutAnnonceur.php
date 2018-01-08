@@ -28,27 +28,34 @@ if(isset($_POST['btnSub']))
 			// si email absent
 			if($exists == 0)
 			{	
-				// préparation requete
-				$stmt = $dbh->prepare("INSERT INTO annonceurs(pseudo, mdp,nom, prenom, email,telephone) VALUES(:pseudo, :mdp, :nom, :prenom, :email, :telephone)");
-				//hashage mot de passe
-				$hash = password_hash($safe['mdp'], PASSWORD_DEFAULT);
-				// paramètres
-				$params = array(':pseudo' => $safe['pseudo'],
-								':mdp' => $hash,
-								':nom' => $safe['nom'],
-								':prenom' => $safe['prenom'],
-								':email' => $safe['email'],
-								':telephone' => $safe['telephone']
-								);
-				//exécution
-				if($stmt->execute($params))
-				{
-					//c'est OK!
-					echo '<div class="alert alert-success">
-								Merci pour votre inscription.
-								</div></div>';
-				} // fin execute
-				else echo '<div class="alert alert-danger">oups</div>'; 
+				if(isset($_POST['checkbox']))
+                {
+                    // préparation requete
+                    $stmt = $dbh->prepare("INSERT INTO annonceurs(pseudo, mdp,nom, prenom, email,telephone) VALUES(:pseudo, :mdp, :nom, :prenom, :email, :telephone)");
+                    //hashage mot de passe
+                    $hash = password_hash($safe['mdp'], PASSWORD_DEFAULT);
+                    // paramètres
+                    $params = array(':pseudo' => $safe['pseudo'],
+                                    ':mdp' => $hash,
+                                    ':nom' => $safe['nom'],
+                                    ':prenom' => $safe['prenom'],
+                                    ':email' => $safe['email'],
+                                    ':telephone' => $safe['telephone']
+                                    );
+                    //exécution
+                    if($stmt->execute($params))
+                    {
+                        //c'est OK!
+                        echo '<script>	window.location.replace("connexion.php");
+				        </script>';
+                        echo '<div class="alert alert-success">
+                                    Merci pour votre inscription.
+                                    </div></div>';
+                    } // fin execute
+                    else echo '<div class="alert alert-danger">oups</div>'; 
+                }
+                else echo '<script>alert("Merci d\'accepter les conditions générale de notre site Qui Perd, Trouve !");
+                window.location.href = "inscription.php"</script>';
 			} // fin $exists == 0
 			else echo '<div class="alert alert-danger">Adresse mail déjà présente.</div>';
 		} // fin test mdp

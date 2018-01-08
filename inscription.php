@@ -31,14 +31,20 @@ include "includes/header.php";
 					 placeholder = "8 caractères minimum dont une majuscule et un chiffre" />
 	</div>
 	<div class="form-group col-md-offset-2 col-md-8">
-		<label>telephone</label>
+		<label>Téléphone</label>
 		<input type="text" name="telephone" class="form-control" 
 		       placeholder="Votre téléphone"/>
 	</div>
+	<div class="form-group col-md-offset-2 col-md-8">
+        <input type="checkbox" name="checkbox" required/>
+        <label for="">J'accepte <a href="cdg.php">les conditions générales de vente de Qui perd, Trouve !</a></label>
+    </div>
 	<div class="form-group text-center">
-		<input type="submit" name="btnSub" value="Je m'inscris"
-					 class="btn btn-boutons" />	
+		<button type="submit" name="btnSub" class=" btn-boutons" id="btn_inscrire"> 
+		    <span class="btn_text">Je m'inscris</span>
+        </button>
 	</div>
+	<div class="clearfix"></div>
 </form>
 <?php
 require 'includes/footer.php';

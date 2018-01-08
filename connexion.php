@@ -23,6 +23,7 @@ include 'includes/header.php';
 		<a href="mdp_perdu.php">Mot de passe perdu</a>
 	</div>
 </form>
+<div class="clearfix"></div>
 <?php
 include 'includes/footer.php';
 ?>

@@ -63,17 +63,6 @@ $rowCount = $query->rowCount();
             </div>
         </div>
     </form>
-        
-        
-        
-    
-    <!--<select name="departement" id="departement">
-        <option value="">Select country first</option>
-    </select>
-    
-    <select name="ville" id="ville">
-        <option value="">Select state first</option>
-    </select>-->
 </div>
 
 
@@ -182,7 +171,7 @@ else
 
     {
             echo '<article class="col-md-2">
-                    <a href="annonce.php?id_objet='.$objet['id_objet'].'" class="lien_annonce">
+                    <a href="annonce_perdu.php?id_objet='.$objet['id_objet'].'" class="lien_annonce">
                         <h3><strong>'.ucfirst($objet['titre']).'</strong></h3>';
             if(trim($objet['photo']) !== ''){
                 echo '<img src="images/'.$objet['photo'].'" alt="'.$objet['titre'].'" 
@@ -200,16 +189,17 @@ else
 
                     </a>                    
                 </article>';
-        if(($nb !=0) AND (($nb+1)%4 ===0)) echo '</section><section class="row"></section>'; 
+        if(($nb !=0) AND (($nb+1)%4 ===0)) echo '<section class="row"></section>'; 
         } // fin foreach
+    echo '</section>';
 } // fin if count > 0
+
 
 // liens de pagination
 echo '<ul class="pagination">';
 if($page >1) echo '<li>
                         <a href="perdu.php?page='.($page-1).'">Précedent</a>
                     </li>';
-
 for($i=1; $i<=$nbPages; $i++)
 {
     $classe = '';

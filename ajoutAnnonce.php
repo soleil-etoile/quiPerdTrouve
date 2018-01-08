@@ -9,8 +9,10 @@ require 'includes/toolbox.php';
 
  if(isset($_POST['btnSub']) && !empty($_POST['btnSub']))
 {
+    // si on a choisi est-c'est que ce perdu ou trouvé
     if(isset($_POST['id_trouve_perdu']))
     {
+        // si le CGV sont acentées
         if(isset($_POST['checkbox']))
         {
             $radio_input = $_POST['id_trouve_perdu'];
@@ -43,6 +45,9 @@ require 'includes/toolbox.php';
 
             // preparation
             $stmtAnnonce = $dbh->prepare("INSERT INTO objets (id_trouve_perdu, titre, description, photo, date_objet, montant_recompense, id_annonceur, id_type, id_lieu, id_pays, code_departement, id_ville, id_option) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            if($safe['id_lieu'] == '') $safe['id_lieu'] = NULL;
+            if($safe['departement'] == '') $safe['departement'] = NULL;
+            if($safe['ville'] == '') $safe['ville'] = NULL;
             // parametres
             $params = array(
                             $safe['id_trouve_perdu'],            
@@ -59,8 +64,10 @@ require 'includes/toolbox.php';
                             $safe['ville'],
                             $safe['options']                        
                             );
+            
             // exécution
             $stmtAnnonce->execute($params);
+            //var_dump($params);
             // retour
             echo '<img src="images/logo/ok.png" />';
             echo '<a href="index.php" class="resultat">Votre annonce a été mise en ligne.</a>';

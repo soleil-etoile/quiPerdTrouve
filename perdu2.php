@@ -106,7 +106,7 @@ if(isset($_POST['btnSub']))
             {
 
                 echo '<article class="col-md-2">
-                        <a href="annonce.php?id_objet='.$objet['id_objet'].'" class="lien_annonce">
+                        <a href="annonce_perdu.php?id_objet='.$objet['id_objet'].'" class="lien_annonce">
                             <h3><strong>'.ucfirst($objet['titre']).'</strong></h3>';
                 if(trim($objet['photo']) !== ''){
                     echo '<img src="images/'.$objet['photo'].'" alt="'.$objet['titre'].'" 
@@ -123,9 +123,9 @@ if(isset($_POST['btnSub']))
                                 <hr/>
                             </a>
                         </article>';
-        if(($nb !=0) AND (($nb+1)%4 ===0)) echo '</section><section class="row">';
+                if(($nb !=0) AND (($nb+1)%4 ===0)) echo '<section class="row"></section>';
             } 
-            
+            echo '</section>';
         }// fin if count > 0
         
         // liens de pagination

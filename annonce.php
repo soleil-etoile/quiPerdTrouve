@@ -1,6 +1,6 @@
 <?php
 // perdu.php
-$titrePage = "Qui Perd, Trouve ! - J'ai perdu";
+$titrePage = "Qui Perd, Trouve ! - Je recherche";
 require 'includes/header.php';
 //boite à outils (pour les dates)
 require 'includes/toolbox.php';
@@ -16,7 +16,7 @@ require 'includes/toolbox.php';
 
 <?php
 $safe = array_map('strip_tags', $_GET);
-        $stmtObjets = $dbh->prepare("SELECT o.titre, o.photo, o.date_objet, o.montant_recompense, o.description, o.id_annonceur, l.lieu, v.ville_nom_reel, v.nom_departement, p.nom_fr_fr
+        $stmtObjets = $dbh->prepare("SELECT o.titre, o.photo, o.date_objet, o.montant_recompense, o.description, o.id_annonceur, o.id_trouve_perdu, l.lieu, v.ville_nom_reel, v.nom_departement, p.nom_fr_fr, tp.nom_trouve_perdu
                                 FROM objets as o
                                 LEFT JOIN lieux as l 
                                 ON o.id_lieu = l.id_lieu
@@ -24,8 +24,9 @@ $safe = array_map('strip_tags', $_GET);
                                 ON o.id_ville = v.id_ville
                                 LEFT JOIN pays as p
                                 ON o.id_pays = p.id_pays
-                                WHERE o.id_trouve_perdu = 2
-                                AND o.id_objet = :id_objet");
+                                LEFT JOIN trouve_perdu as tp
+                                ON o.id_trouve_perdu = tp.id_trouve_perdu
+                                WHERE o.id_objet = :id_objet");
 
         // paramètres
         $params = array(':id_objet' => $safe['id_objet']);
@@ -57,6 +58,7 @@ $safe = array_map('strip_tags', $_GET);
                             class="img-responsive img-rounded photoObjet" />';
                 }
                 echo '       <ul class="liste_annonce">    
+                                    <li><strong>Type d\'annonce: </strong>'.ucfirst($objet['nom_trouve_perdu']).'</li>
                                     <li><strong>Date: </strong>'.dateFR($objet['date_objet']).'</li>
                                     <li><strong>Lieu: </strong>'.ucfirst($objet['lieu']).'</li>
                                     <li><strong>Localisation: </strong>'.ucfirst($objet['ville_nom_reel']).' / '.ucfirst($objet['nom_departement']).' / '.ucfirst($objet['nom_fr_fr']).'</li>
@@ -92,13 +94,13 @@ $safe = array_map('strip_tags', $_GET);
         </div>
         <div class="form-group">
             <label>Message:</label>
-            <input type="text" name="message" class="form-control" 
-                         placeholder="Votre message" required/>
+            <textarea name="message" row="5" class="form-control" placeholder="Votre message" required></textarea>
         </div>
         
         <div class="form-group text-center">
-		<input type="submit" name="btnSub" value="J'envoie mon message"
-					 class="btn btn-boutons" />	
+		    <button type="submit" name="btnSub" class="btn btn-boutons btn_contact_annonceur">
+                <span class="btn_text">J'envoie</span>
+            </button>	
 	</div>
     </form>
 </div>

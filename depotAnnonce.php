@@ -24,19 +24,23 @@ $listeOptions = $stmtOptions->fetchAll();
 
 //verification de connexion
 if(isset($_SESSION['auth'])):
-?>    
-<div class="col-md-2 col-xs-2">
+?>
+<div class="row">    
+    <div class="col-md-3 col-xs-2">
         <sidebar class="pub">
+            <h3>Publicités</h3>
+            <p>Ab velit occaecat philosophari ea commodo quae in voluptate consectetur, quibusdam instituendarum o nostrud, aute pariatur eiusmod. Litteris aliqua deserunt deserunt e nam appellat reprehenderit, multos ad voluptate, magna ad qui amet incurreret, ubi ea sunt quamquam, sunt doctrina coniunctione, </p>
             <?php
             require 'includes/pub_gauche.php';
             ?>
         </sidebar>   
     </div>
-    <div class="col-md-8">
+    <div class="col-md-7 col-xs-6">
         <h2>Je dépose une annonce</h2>       
         <form method="post" action="ajoutAnnonce.php" enctype="multipart/form-data">
-            <div class="form-group">
-                <label for="">Type d'annonce</label><br/>
+            <div class="form-group class="input-group"">
+                <label for="">Type d'annonce </label>
+                <label class="renvoi"> *</label><br/>
                 
                 <input type="radio" id="jaitrouve" name="id_trouve_perdu" value="1"/>J'ai trouvé &nbsp;
                 
@@ -45,10 +49,12 @@ if(isset($_SESSION['auth'])):
             </div>
             <div class="form-group">
                 <label for="">Titre</label>
+                <label class="renvoi"> *</label>
                 <input type="text" name="titre" class="form-control" />
             </div>
             <div class="form-group">
                 <label for="">Déscription</label>
+                <label class="renvoi"> *</label>
                 <textarea name="description" row="5" class="form-control"></textarea>
             </div>
             <div class="form-group">
@@ -57,24 +63,20 @@ if(isset($_SESSION['auth'])):
             </div>
             <div class="form-group">
                 <label for="">Date de l'événement</label>
+                <label class="renvoi"> *</label>
                 <input type="date" id="datepicker" name="date_objet" class="form-control"  />
             </div>
-            <!--<div class="form-row">
-                <label for="c2">Currency w bootstrap</label>
-                <div class="input-group"> 
-                    <span class="input-group-addon">$</span>
-                    <input type="number" value="1000" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" id="c2" />
-            </div> -->
             <div class="form-group form-row">
                 <label for="">Recompense</label>
+                <label class="renvoi"> *</label>
             </div>
             <div class="input-group">
-                
                 <input type="text" name="montant_recompense" required class="form-control currency" />
                 <span class="input-group-addon">€</span>
             </div>
             <div class="form-group">
                 <label for="">Catégorie</label>
+                <label class="renvoi"> *</label>
                 <select name="id_type" required class="form-control">
                     <option value="" selected disabled>Catégorie</option>
                     <?php foreach($listeCat as $cat): ?>
@@ -85,7 +87,7 @@ if(isset($_SESSION['auth'])):
             <div class="form-group">
                 <label for="">Lieux</label>
                 <select name="id_lieu" class="form-control">
-                    <option value="8" selected>Choisissez un lieu</option>
+                    <option value="" selected>Choisissez un lieu</option>
                     <?php foreach($listeLieux as $lieu): ?>
                     <option value="<?= $lieu['id_lieu']; ?>"><?= $lieu['lieu']; ?></option>    
                     <?php endforeach; ?>
@@ -93,6 +95,7 @@ if(isset($_SESSION['auth'])):
             </div>
             <div class="form-group">
                 <label for="">Pays</label>
+                <label class="renvoi"> *</label>
                 <select name="pays" id="pays" required class="form-control">
                     <option value="" selected disabled>Pays</option>
                     <?php 
@@ -114,19 +117,18 @@ if(isset($_SESSION['auth'])):
             </div>
             <div class="form-group city-select">
                 <label for="name" class="col-sm-2 control-label">Ville</label>
-                <select class="form-control" name="ville" id="ville"></select>
+                <select class="form-control" name="ville" id="ville">
+                <option value=""></option>
+                </select>
             </div>
             <div class="form-group">
                 <label for="">Remonter mon annonce en tête de liste</label><br/>
                 <select name="options" class="form-control">
-                    <option value="" selected>Pour mettre en avant votre annonce, choisissez une option facultative.</option>
+                    <option value="3" selected>Pour mettre en avant votre annonce, choisissez une option facultative.</option>
                     <?php foreach($listeOptions as $option): ?>
                     <option value="<?= $option['id_option']; ?>"><?= $option['detail_option']; ?></option>    
                     <?php endforeach; ?>
                 </select>
-                 
-                
-                
             </div>
             <div class="form-group">
                 <input type="checkbox" name="checkbox" required/>
@@ -137,16 +139,21 @@ if(isset($_SESSION['auth'])):
             <div class="form-group text-center">
                 <input type="submit" class="btn btn-bibli" name="btnSub" value="J'ajoute" />
             </div>
+            <label class="renvoi">* </label>
+            <label class="label label-danger"> Champs obligatoires</label>
 
         </form>
     </div>
     <div class="col-md-2 col-xs-2">
         <sidebar class="pub">
+           <h3>Publicités</h3>
+                <p>Ab velit occaecat philosophari ea commodo quae in voluptate consectetur, quibusdam instituendarum o nostrud, aute pariatur eiusmod. Litteris aliqua deserunt deserunt e nam appellat reprehenderit, multos ad voluptate, magna ad qui amet incurreret, ubi ea sunt quamquam, sunt doctrina coniunctione, </p>
             <?php
             require 'includes/pub_droite.php';
             ?>
         </sidebar>   
     </div>
+</div>
 <div class="clearfix"></div>
 
 <?php
@@ -155,7 +162,7 @@ else: ?>
     <br />
     <div>
        <img src="images/logo/veuillez-vous_connecter.png" alt="">
-        <a href="connexion.php">Connectez-vous </a>pour déposer une annonce.
+        <a href="connexion.php" class="">Connectez-vous </a>pour déposer une annonce.
     </div>
     <?php endif; 
     

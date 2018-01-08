@@ -17,7 +17,7 @@ if(isset($_POST['btnSub']))
 			//include database
 			require 'includes/database.php';
 			//préparation
-			$stmt = $dbh->prepare("SELECT id_annonceur, pseudo, mdp, email
+			$stmt = $dbh->prepare("SELECT id_annonceur, pseudo, nom, prenom, mdp, email
 									FROM annonceurs
 									WHERE email = :email");
 			//paramètres
@@ -27,7 +27,7 @@ if(isset($_POST['btnSub']))
 			//récupération
 			$annonceur = $stmt->fetch();
 			// pour le controle
-			print_r($annonceur);
+			//print_r($annonceur);
 			// controle validité mot de passe	
 			if(password_verify($safe['mdp'], $annonceur['mdp']))
 			{
@@ -42,7 +42,7 @@ if(isset($_POST['btnSub']))
 				//redirection
 				echo '<script>
 						alert("Bonjour '
-						.$annonceur['pseudo']
+						.$annonceur['prenom']
 						.'");
 						window.location.replace("index.php");
 						</script>';

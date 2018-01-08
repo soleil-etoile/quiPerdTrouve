@@ -38,13 +38,19 @@ session_start();//toujours en haut
 <body>
     <div class="container-fluid">
         <header class="header row">
-            <div class="col-md-3 col-xs-6">
-                <img src="images/logo.png" alt="logo Qui Perd-Trouve" class="img-responsive" id="logo">              
+            <div class="col-md-4 col-xs-4">
+                <a href="index.php"><img src="images/logo.png" alt="logo Qui Perd-Trouve" class="img-responsive" id="logo"></a>           
             </div>
-            <div class="col-md-9 col-xs-6">
+            <div class="col-md-5 col-xs-4">
                 
                 <h1>Aidez vos objets à vous retrouver !</h1>
             </div> 
+            <div class="col-md-3 col-xs-4">
+                <a href="nousContacter.php" class="lien_contacter">
+                    <img src="images/logo/nous_contacter.png" alt="nous_contacter" id="nous_contacter">
+                    Nous Contacter
+                </a>
+            </div>
         </header>
         
         <?php 

@@ -11,7 +11,7 @@
             </button>
             <a class="navbar-brand" href="index.php"><i class="glyphicon glyphicon-home"></i> Accueil</a>
             <a class="navbar-brand" href="perdu.php"><i class="glyphicon glyphicon-zoom-out"></i> J'ai perdu</a>
-            <a class="navbar-brand" href="index.php"><i class="glyphicon glyphicon-zoom-in"></i> J'ai trouvé</a>
+            <a class="navbar-brand" href="trouve.php"><i class="glyphicon glyphicon-zoom-in"></i> J'ai trouvé</a>
             <a class="navbar-brand" href="depotAnnonce.php"><i class="glyphicon glyphicon-copy"></i> Je dépose une annonce</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -25,7 +25,7 @@
                 if(isset($_SESSION['auth'])):
                 ?>
                 <li> <a href="quitter.php" class="nav-btn-droit">
-                     <i class="glyphicon glyphicon-log-out"></i>Déconnexion <?php echo $_SESSION["pseudo"]; ?></a>
+                     <i class="glyphicon glyphicon-log-out"></i>Déconnexion <?php echo $_SESSION['pseudo']; ?></a>
                 </li>
                 <?php else: ?>
                 <!--menu non connecté-->                    

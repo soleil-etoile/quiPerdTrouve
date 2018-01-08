@@ -4,10 +4,11 @@
                     <a href="apropos.php">A propos de nous -</a>
                 </div>
                 <div class="footdiv">
-                    <a href="cgu.php">Conditions générales de vente -</a>
+                    <a href="cgv.php">Conditions générales de vente -</a>
                 </div>
+
                 <div class="footdiv">
-                    <a href="frais.php">Frais -</a>
+                    <a href="nousContacter.php">Nous Contacter ?</a>
                 </div>
                 <div class="footdiv">Copyright &copy; IrZa
                     <?php unset($dbh); // fermeture connexion BDD ?>

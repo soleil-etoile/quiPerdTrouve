@@ -11,6 +11,9 @@ body {
     background: ghostwhite !important;
     color: #55c1ff;
 }
+main {
+    margin-bottom: 90px;
+}
 h1 {
     color: #102E4A;
     font-family: 'Oswald', sans-serif;
@@ -34,7 +37,17 @@ h3 {
     height: 170px;
     margin: 0 auto;
 }
-
+#nous_contacter {
+    height: 150px;
+}
+.lien_contacter {
+    color: ghostwhite;
+    font-size: 130%;
+    font-weight: bold;
+}
+.lien_contacter:hover {
+    text-decoration: none;
+}
 .navbar-perdu {
     background-color: #5887ff;
     color: ghostwhite;
@@ -56,19 +69,34 @@ h3 {
     background: ghostwhite;
     text-align: justify;
     color:  #5887ff;
-    margin: 2px;
+    margin: 20px 5px;
 
 }
 .lienscentraux {
-    height: 800px;
+    height: 1000px;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     background-color: #d0dfed;
     /*padding: 20% 10%;*/
     width: 100%;
     text-align: center;
 }
+
+@media (max-width: 960px) {
+    .lienscentraux {
+        height: 600px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: #d0dfed;
+        /*padding: 20% 10%;*/
+        width: 100%;
+        text-align: center;
+    }
+}
+
 .lien_annonce:hover {
     text-decoration: none;
 }
@@ -76,48 +104,43 @@ h3 {
     font-size: 120%;
 }
 
-footer {
-    padding: 1%;
-    margin-top:25%;
-    background-color: #5887ff;
-    text-align: center;
-    color: #102E4A;
-}
-.footdiv {
-    display: inline-block;
-    text-align: center;
-    color: aliceblue;
-}
-footer div a {
-    color: ghostwhite;
-    font-size: 110%;
-}
-.clearfix {
-    clear: both;
-}
+
+
 .boutons {
-    /*margin-top: 200%;*/
     text-decoration: none;
     color: #102E4A;
     font-weight: bold;
     font-size: 200%;
     width: 100%;
-    /*line-height: 30px;*/
-
-    /*margin: 0%;*/
-    /*margin-top: 100px;*/
 }
 .boutons:hover {
     text-decoration: none;
     
 }
 .btn-boutons {
-    padding: 6%;
-    margin: 5%;
-    border-radius: 100%;
+    /*padding: 5%;
+    margin: 5%;*/
+    width: 150px;
+    height: 150px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px grey,
+        inset 0 2px 0 white,
+        0 2px 0 grey,
+        inset 0 0 20px grey;
+    font-size: 150%;
+    /* pour boutons d'envoi */
+    display: flex;
+    justify-content: center;
+}
+.btn_text {
+    text-align: center;
+    color: #102E4A;
+    font-weight: bold;
+    align-items: flex-end;
+    padding-top: 115px;
 }
 button {
-    /*text-align: center;*/
+    text-align: center;
     margin:  0 auto;
 }
 #btn_perdu {
@@ -129,7 +152,33 @@ button {
 #btn_trouve {
     background-image: url("../images/logo/trouve_bouton.jpg");
 }
+#btn_inscrire{
+    background-image: url("../images/logo/inscrire150.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.btn_contact_annonceur {
+    background-image: url("../images/logo/contact_annonceur150.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
 .btn_buttons {
+    background-size: contain;
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+    text-align: center;
+    /*line-height: 100px;*/
+    margin: 30px;
+    padding-top: 150px;
+    box-shadow: 0 0 20px grey,
+        inset 0 2px 0 white,
+        0 2px 0 grey,
+        inset 0 0 20px grey;
+}
+@media (max-width: 1190px) {
+    .btn_buttons {
     background-size: contain;
     width: 150px;
     height: 150px;
@@ -137,12 +186,12 @@ button {
     text-align: center;
     /*line-height: 100px;*/
     margin: 30px;
-    padding-top: 100px;
+    padding-top: 150px;
     box-shadow: 0 0 20px grey,
         inset 0 2px 0 white,
         0 2px 0 grey,
         inset 0 0 20px grey;
-    /*vertical-align: text-bottom;*/
+    }
 }
 .btn_centre{
     padding-top: 10px;
@@ -155,6 +204,7 @@ button {
         inset 2px 2px 45px grey;
     transform: scale(1.2);
 }
+
 #img_perdu {
     height: 150px;
     border-radius: 10px;
@@ -197,4 +247,33 @@ legend {
 }
 .resultat {
     font-size: 400%;
+}
+.renvoi {
+    color: red;
+    font-weight: bold;
+    font-size: 150%;    
+}
+.clearfix {
+    clear: both;
+}
+footer {
+    /*padding: 1%;*/
+    /*margin-top:25%;*/
+    background-color: #5887ff;
+    text-align: center;
+    color: #102E4A;
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    padding: 10px;
+}
+.footdiv {
+    display: inline-block;
+    text-align: center;
+    color: aliceblue;
+}
+footer div a {
+    color: ghostwhite;
+    font-size: 110%;
 }

@@ -110,19 +110,19 @@ INSERT INTO `objets` (`id_objet`, `id_trouve_perdu`, `titre`, `description`, `ph
 (6, 2, 'bague', 'bague en or', 'no_photo.jpg', '2017-12-11', 50, 4, 3, 7, 75, 38, 14785, 1),
 (7, 2, 'chapeau', 'chapeau rose', 'chapeau.jpg', '2017-12-11', 10, 2, 5, 4, 75, 0, 32451, 1),
 (8, 2, 'telephone', 'telephone portable  Samsung', 'tel.jpg', '2017-12-20', 50, 1, 4, 6, 75, 0, 23547, 1),
-(9, 1, 'fdsfgdfd', 'gdfgdfgdfgd', '1628174bdbb6163166575c56e88c020e.jpg', '0000-00-00', 0, 4, 1, 8, 75, 0, 0, 0),
-(10, 1, 'fdsfgdfd', 'gdfgdfgdfgd', '9070b995c8470ab7f8500e9228c555f1.jpg', '0000-00-00', 0, 4, 1, 8, 75, 0, 0, 0),
-(11, 2, 'opù', 'ipùç', '	\r\nno_photo.jpg', '0000-00-00', 0, 4, 3, 2, 11, 0, 0, 0),
-(12, 2, 'opù', 'ipùç', '	\r\nno_photo.jpg', '0000-00-00', 0, 4, 3, 5, 11, 0, 0, 0),
-(13, 2, 'opù', 'ipùç', '	\r\nno_photo.jpg', '0000-00-00', 0, 4, 3, 3, 11, 0, 0, 0),
-(14, 2, 'opù', 'ipùç', '	\r\nno_photo.jpg', '0000-00-00', 0, 4, 3, 7, 11, 0, 0, 0),
-(15, 2, 'opù', 'ipùç', 'no_photo.jpg', '0000-00-00', 0, 4, 3, 6, 11, 0, 0, 0),
-(16, 1, 'test', '123 456', 'no_photo.jpg', '0000-00-00', 0, 4, 3, 1, 75, 0, 0, 0),
-(18, 2, 'truc', 'test 123', 'no_photo.jpg', '0000-00-00', 0, 4, 1, 8, 75, 0, 0, 0),
+(9, 1, 'fdsfgdfd', 'gdfgdfgdfgd', '1628174bdbb6163166575c56e88c020e.jpg', '2017-12-11', 0, 4, 1, 8, 75, 0, 0, 0),
+(10, 1, 'fdsfgdfd', 'gdfgdfgdfgd', '9070b995c8470ab7f8500e9228c555f1.jpg', '2017-12-11', 0, 4, 1, 8, 75, 0, 0, 0),
+(11, 2, 'opù', 'ipùç', '	\r\nno_photo.jpg', '2017-12-20', 0, 4, 3, 2, 11, 0, 0, 0),
+(12, 2, 'opù', 'ipùç', '	\r\nno_photo.jpg', '2017-12-20', 0, 4, 3, 5, 11, 0, 0, 0),
+(13, 2, 'opù', 'ipùç', '	\r\nno_photo.jpg', '2017-10-11', 0, 4, 3, 3, 11, 0, 0, 0),
+(14, 2, 'opù', 'ipùç', '	\r\nno_photo.jpg', '2017-12-11', 0, 4, 3, 7, 11, 0, 0, 0),
+(15, 2, 'opù', 'ipùç', 'no_photo.jpg', '2017-10-11', 0, 4, 3, 6, 11, 0, 0, 0),
+(16, 1, 'test', '123 456', 'no_photo.jpg', '2017-10-11', 0, 4, 3, 1, 75, 0, 0, 0),
+(18, 2, 'truc', 'test 123', 'no_photo.jpg', '2017-10-11', 0, 4, 1, 8, 75, 0, 0, 0),
 (19, 2, 'Mon cerveau', 'Diminution de neurones en fin de formation.', 'no_photo.jpg', '0000-00-00', 10000, 4, 8, 8, 84, 0, 0, 1),
-(20, 2, 'test departement', '', 'no_photo.jpg', '2018-01-21', 0, 4, 5, 8, 75, 6, 1962, 0),
-(21, 2, 'test departement', '', 'no_photo.jpg', '2018-01-21', 0, 4, 5, 8, 75, 16, 5849, 1),
-(22, 2, 'test departement2', '', 'no_photo.jpg', '2018-01-21', 0, 4, 5, 2, 75, 17, 6000, 1),
+(20, 2, 'test departement', '', 'no_photo.jpg', '2018-01-01', 0, 4, 5, 8, 75, 6, 1962, 0),
+(21, 2, 'test departement', '', 'no_photo.jpg', '2018-01-01', 0, 4, 5, 8, 75, 16, 5849, 1),
+(22, 2, 'test departement2', '', 'no_photo.jpg', '2018-01-01', 0, 4, 5, 2, 75, 17, 6000, 1),
 (23, 2, 'stylo', 'stylo vert', '05be0fdfcdca264494780cd98b851daf.jpg', '2018-01-01', 10000, 4, 8, 8, 75, 2, 706, 2),
 (24, 2, 'stylo', 'stylo vert', '6c608dd5eb05a04b34989e3861e9c502.jpg', '2018-01-01', 10000, 4, 8, 8, 75, 2, 706, 2),
 (25, 2, 'stylo', 'stylo vert', 'd7ba8e0edc38f134512b76e54bc4a115.jpg', '2018-01-01', 10000, 4, 8, 8, 75, 2, 706, 2),
@@ -173,7 +173,7 @@ CREATE TABLE `pays` (
   `alpha3` varchar(3) NOT NULL,
   `nom_en_gb` varchar(45) NOT NULL,
   `nom_fr_fr` varchar(45) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `pays`
@@ -483,7 +483,7 @@ CREATE TABLE `villes_france_free` (
   `ville_nom_reel` varchar(45) DEFAULT NULL,
   `ville_code_postal` varchar(255) DEFAULT NULL,
   `ville_commune` varchar(3) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `villes_france_free`
@@ -37367,7 +37367,10 @@ ALTER TABLE `objets`
   ADD CONSTRAINT `objets_ibfk_1` FOREIGN KEY (`id_lieu`) REFERENCES `lieux` (`id_lieu`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `objets_ibfk_2` FOREIGN KEY (`id_type`) REFERENCES `type_objet` (`id_type`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `objets_ibfk_3` FOREIGN KEY (`id_annonceur`) REFERENCES `annonceurs` (`id_annonceur`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `objets_ibfk_4` FOREIGN KEY (`id_pays`) REFERENCES `pays` (`id_pays`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `objets_ibfk_5` FOREIGN KEY (`id_ville`) REFERENCES `villes_france_free` (`id_ville`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `objets_ibfk_6` FOREIGN KEY (`id_trouve_perdu`) REFERENCES `trouve_perdu` (`id_trouve_perdu`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `objets_ibfk_7` FOREIGN KEY (`id_option`) REFERENCES `options_payantes` (`id_option`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
